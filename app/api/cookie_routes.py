@@ -56,7 +56,6 @@ def create_cookie():
 
     db.session.add(new_cookie)
     db.session.commit()
-    console.log("the route is getting hit")
     return jsonify(new_cookie.to_dict()), 201
 #Edit a Cookie
 @cookie_routes.route('/<int:id>', methods=['PUT'])
@@ -78,7 +77,7 @@ def edit_cookie(id):
     cookie.name = data.get('name', cookie.name)
     cookie.description = data.get('description', cookie.description)
     cookie.price = data.get('price', cookie.price)
-    cookie.updated_at = datetime.now(timezone.est)
+    # cookie.updated_at = datetime.now(timezone.est)
 
     db.session.commit()
 
