@@ -7,7 +7,7 @@ cookie_routes = Blueprint('cookies', __name__)
 
 #Get All Cookies
 @cookie_routes.route('/', methods=['GET'])
-# @login_required
+@login_required
 def get_all_cookies():
     """
     Get all cookies that exist in the db
@@ -18,7 +18,7 @@ def get_all_cookies():
 
 #Get cookie by id
 @cookie_routes.route('/<int:id>', methods=['GET'])
-# @login_required
+@login_required
 def get_cookie_by_id(id):
     """
     Returns a cookie by specific id
@@ -32,7 +32,7 @@ def get_cookie_by_id(id):
 
 #Post a new Cookie
 @cookie_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def create_cookie():
     """
     Create a new cookie
@@ -57,10 +57,10 @@ def create_cookie():
     db.session.add(new_cookie)
     db.session.commit()
     return jsonify(new_cookie.to_dict()), 201
+
 #Edit a Cookie
 @cookie_routes.route('/<int:id>', methods=['PUT'])
-
-# @login_required
+@login_required
 def edit_cookie(id):
     """
     Edit a cookie by id
@@ -85,7 +85,7 @@ def edit_cookie(id):
 
 #delete a Cookie
 @cookie_routes.route('/<int:id>', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_cookie(id):
     cookie = Cookie.query.get(id)
     if not cookie:

@@ -1,0 +1,29 @@
+.cookies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.cookie-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cookie-card:hover {
+    transform: scale(1.05);
+}
+
+.cookie-card h2 {
+    margin: 0 0 8px;
+}
+
+.cookie-card p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
