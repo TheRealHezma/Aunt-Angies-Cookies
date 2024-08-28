@@ -4,8 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import CookiesHome from '../components/CookiesPages/CookiesHome';
 import CookiesDescription from '../components/CookiesPages/CookiesDescription';
-
-
+import CreateCookieForm from '../components/CookiesPages/CreateCookieForm';
 
 export const router = createBrowserRouter([
   {
@@ -25,12 +24,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "cookies",
-        element: <CookiesHome />
+        element: <CookiesHome />,
+      },
+      {
+        path: "cookies/new", // New path for creating a cookie
+        element: <CreateCookieForm />,
       },
       {
         path: "cookies/:id",
-        element: <CookiesDescription />
-      }
+        element: <CookiesDescription />,
+      },
     ],
   },
 ]);
