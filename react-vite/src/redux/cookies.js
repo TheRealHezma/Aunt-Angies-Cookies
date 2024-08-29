@@ -75,6 +75,8 @@ export const thunkEditCookie = (id, cookieData) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(editCookie(data));
+    } else {
+        console.error("Failed to edit the cookie.");
     }
 };
 
@@ -115,7 +117,8 @@ export default function cookiesReducer(state = initialState, action) {
         case EDIT_COOKIE:
             return {
                 ...state,
-                allCookies: { ...state.allCookies, [action.cookie.id]: action.cookie }
+                allCookies: { ...state.allCookies, [action.cookie.id]: action.cookie },
+                currentCookie: action.cookie, // Update currentCookie to reflect the changes
             };
 
         case DELETE_COOKIE:

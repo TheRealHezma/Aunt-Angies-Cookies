@@ -24,6 +24,10 @@ function CookiesDescription() {
         }
     };
 
+    const handleEdit = () => {
+        navigate(`/cookies/${id}/edit`); // Navigate to the edit page for the cookie
+    };
+
     // Render a loading state if the cookie is not yet loaded
     if (!cookie) {
         return <p>Loading...</p>;
@@ -40,7 +44,10 @@ function CookiesDescription() {
             <p>Price: ${cookie.price.toFixed(2)}</p>
 
             {/* {isOwner && ( */}
-            <button onClick={handleDelete} className="delete-button">Delete</button>
+            <div>
+                <button onClick={handleEdit} className="edit-button">Edit</button>
+                <button onClick={handleDelete} className="delete-button">Delete</button>
+            </div>
             {/* )} */}
         </div>
     );
