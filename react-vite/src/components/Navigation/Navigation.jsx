@@ -9,7 +9,11 @@ function Navigation() {
   return (
     <ul>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">About</NavLink>
+
+      </li>
+      <li>
+        <NavLink to="/cookies">All Cookies</NavLink>
       </li>
 
       <li>

@@ -6,6 +6,7 @@ import CookiesHome from '../components/CookiesPages/CookiesHome';
 import CookiesDescription from '../components/CookiesPages/CookiesDescription';
 import CreateCookieForm from '../components/CookiesPages/CreateCookieForm';
 import EditCookieForm from '../components/CookiesPages/EditCookieForm'
+import HomePage from '../components/HomePage/HomePgae';
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <HomePage />,
       },
       {
         path: "login",
