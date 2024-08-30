@@ -27,7 +27,6 @@ def get_cookie_by_id(id):
 
     if not cookie:
         return jsonify({'message': 'Cookie could not be found'}), 404
-    print("HELLLLLLLLLLLLLLLLLLLLLO")
     return jsonify(cookie.to_dict()), 200
 
 #Post a new Cookie
@@ -37,7 +36,6 @@ def create_cookie():
     """
     Create a new cookie
     """
-    print("IM HEERRREEEEEEEEEEEEEEEEEEEEEE")
     data = request.get_json()
     name = data.get('name')
     description = data.get('description')
