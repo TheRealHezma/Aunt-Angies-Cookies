@@ -1,7 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .cookies import seed_cookies, undo_cookies
-
+from .reviews import seed_reviews, undo_reviews
 
 
 
@@ -22,16 +22,19 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_reviews()
         undo_cookies()
         undo_users()
     seed_users()
     seed_cookies()
+    seed_reviews()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_reviews()
     undo_cookies()
     undo_users()
     # Add other undo functions here

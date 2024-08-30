@@ -16,9 +16,11 @@ class Cookie(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
-    # Relationship with lists NEEED TO FIX THIS
-    # lists = db.relationship('List', backref='board', lazy=True, cascade="all, delete-orphan")
+    # Relationship with reviews
+    reviews = db.relationship('Review', backref='cookie', lazy=True)
     #users_in_board = db.relationship('UserInBoard', backref='board', lazy=True)
+
+
 
     def to_dict(self):
         return {
