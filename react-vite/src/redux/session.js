@@ -11,16 +11,44 @@ const removeUser = () => ({
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
-	const response = await fetch("/api/auth/");
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
-			return;
-		}
+  const response = await fetch("/api/auth/");
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
 
-		dispatch(setUser(data));
-	}
+    dispatch(setUser(data));
+  }
 };
+
+//testing
+// export const thunkLogin = (credentials) => async (dispatch) => {
+//   console.log("thunkLogin called with credentials:", credentials);
+
+//   const response = await fetch("/api/auth/login", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(credentials),
+//   });
+
+//   console.log("API response status:", response.status);
+
+//   if (response.ok) {
+//     const data = await response.json();
+//     console.log("API response data:", data);
+//     dispatch(setUser(data));
+//     return null; // No errors
+//   } else if (response.status < 500) {
+//     const errorMessages = await response.json();
+//     console.log("Client-side error:", errorMessages);
+//     return errorMessages;
+//   } else {
+//     console.log("Server error");
+//     return { server: "Something went wrong. Please try again" };
+//   }
+// };
+
 
 export const thunkLogin = (credentials) => async dispatch => {
   const response = await fetch("/api/auth/login", {
@@ -29,7 +57,7 @@ export const thunkLogin = (credentials) => async dispatch => {
     body: JSON.stringify(credentials)
   });
 
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data));
   } else if (response.status < 500) {
@@ -47,7 +75,7 @@ export const thunkSignup = (user) => async (dispatch) => {
     body: JSON.stringify(user)
   });
 
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data));
   } else if (response.status < 500) {
