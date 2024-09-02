@@ -1,4 +1,5 @@
 from app.models import db, Review, environment, SCHEMA
+from datetime import datetime, timezone
 from sqlalchemy.sql import text
 
 def seed_reviews():

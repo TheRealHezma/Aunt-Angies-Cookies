@@ -12,7 +12,6 @@ def get_all_cookies():
     """
     Get all cookies that exist in the db
     """
-    print("HELLO")
     cookies = Cookie.query.all()
     return jsonify([cookie.to_dict() for cookie in cookies])
 
