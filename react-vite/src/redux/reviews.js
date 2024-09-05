@@ -38,7 +38,7 @@ export const getReviews = (cookieId) => async (dispatch) => {
     }
 };
 
-// Create a new review for a specific cookie
+
 export const createReview = (cookieId, reviewData) => async (dispatch) => {
     const response = await fetch(`/api/cookies/${cookieId}/reviews`, {
         method: 'POST',
@@ -47,6 +47,9 @@ export const createReview = (cookieId, reviewData) => async (dispatch) => {
         },
         body: JSON.stringify(reviewData),
     });
+    console.log("AAAAAAAAAAAA", cookieId)
+    console.log('BBBBBBBBBBBBBB', reviewData)
+    console.log('Response object:', response);  // Log the response object
 
     if (response.ok) {
         const newReview = await response.json();
@@ -55,8 +58,30 @@ export const createReview = (cookieId, reviewData) => async (dispatch) => {
     } else {
         const error = await response.json();
         console.error('Failed to create review', error);
+        return false;  // Return false if request fails
     }
 };
+
+
+// // Create a new review for a specific cookie
+// export const createReview = (cookieId, reviewData) => async (dispatch) => {
+//     const response = await fetch(`/api/cookies/${cookieId}/reviews`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(reviewData),
+//     });
+
+//     if (response.ok) {
+//         const newReview = await response.json();
+//         dispatch(addReview(newReview));
+//         return newReview;
+//     } else {
+//         const error = await response.json();
+//         console.error('Failed to create review', error);
+//     }
+// };
 
 // Edit an existing review by its ID
 export const editReview = (reviewId, reviewData) => async (dispatch) => {

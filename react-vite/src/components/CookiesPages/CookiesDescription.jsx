@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { thunkGetCookieById, thunkDeleteCookie } from '../../redux/cookies';
-import { getReviews, createReview } from '../../redux/reviews';
+import { getReviews, createReview, editReview, removeReview } from '../../redux/reviews';
 import './CookiesDescription.css';
 
 function CookiesDescription() {
@@ -16,13 +16,12 @@ function CookiesDescription() {
     useEffect(() => {
         if (id) {
             dispatch(thunkGetCookieById(id));
-            dispatch(getReviews(id));
+            dispatch(getReviews(id));  // Fetch reviews for the cookie
         }
     }, [dispatch, id]);
 
     useEffect(() => {
         console.log("Reviews updated:", reviews);
-        console.log('Testing reviews', reviews.review)
     }, [reviews]);
 
     const handleDelete = async () => {
@@ -44,15 +43,24 @@ function CookiesDescription() {
         const newReview = {
             review,
             stars,
-            cookie_id: id,
         };
 
-        await dispatch(createReview(newReview));
+        await dispatch(createReview(id, newReview));
         e.target.reset();
     };
 
+    const handleEditReview = async (reviewId, reviewData) => {
+        await dispatch(editReview(reviewId, reviewData));
+    };
+
+    const handleDeleteReview = async (reviewId) => {
+        if (window.confirm('Are you sure you want to delete this review?')) {
+            await dispatch(removeReview(reviewId));
+        }
+    };
+
     if (!cookie) {
-        return <p>No cookie here</p>;
+        return <p>No cookie found</p>;
     }
 
     const isOwner = currentUser && cookie.ownerId === currentUser.id;
@@ -77,10 +85,27 @@ function CookiesDescription() {
                 {reviews && Object.keys(reviews).length > 0 ? (
                     <ul>
                         {Object.values(reviews).map(review => (
-                            <li key={review.id}> {/* Use review.id here */}
-                                <p><strong>{review.username}</strong></p> {/* Display user name */}
-                                <p>{review.review}</p> {/* Access individual review */}
+                            <li key={review.id}>
+                                <p><strong>{review.username}</strong></p>
+                                <p>{review.review}</p>
                                 <p>Rating: {review.stars} stars</p>
+
+                                {currentUser && currentUser.id === review.user_id && (
+                                    <div>
+                                        <button
+                                            onClick={() => handleEditReview(review.id, { review: 'Updated review text', stars: review.stars })}
+                                            className="edit-review-button"
+                                        >
+                                            Edit Review
+                                        </button>
+                                        <button
+                                            onClick={() => handleDeleteReview(review.id)}
+                                            className="delete-review-button"
+                                        >
+                                            Delete Review
+                                        </button>
+                                    </div>
+                                )}
                             </li>
                         ))}
                     </ul>
@@ -103,7 +128,7 @@ function CookiesDescription() {
                     </form>
                 )}
             </div>
-        </div >
+        </div>
     );
 }
 

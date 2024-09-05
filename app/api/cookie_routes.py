@@ -129,7 +129,6 @@ def get_reviews_by_cookie_id(id):
 
 #     return jsonify([review.to_dict() for review in reviews]), 200
 
-# Post a new review
 @cookie_routes.route('/<int:id>/reviews', methods=['POST'])
 @login_required
 def create_review(id):
@@ -155,7 +154,39 @@ def create_review(id):
     db.session.add(new_review)
     db.session.commit()
 
-    return jsonify(new_review.to_dict()), 201
+    # Include username in the response
+    review_dict = new_review.to_dict()
+    review_dict['username'] = current_user.username  # Add the username to the review data
+
+    return jsonify(review_dict), 201
+
+# # Post a new review
+# @cookie_routes.route('/<int:id>/reviews', methods=['POST'])
+# @login_required
+# def create_review(id):
+#     """
+#     Create a new review for a specific cookie
+#     """
+#     data = request.get_json()
+#     review_text = data.get('review')
+#     stars = data.get('stars')
+
+#     if not review_text or not stars:
+#         return jsonify({"message": "Please fill out all fields"}), 400
+
+#     new_review = Review(
+#         user_id=current_user.id,
+#         cookie_id=id,
+#         review=review_text,
+#         stars=stars,
+#         created_at=datetime.now(timezone.utc),
+#         updated_at=datetime.now(timezone.utc)
+#     )
+
+#     db.session.add(new_review)
+#     db.session.commit()
+
+#     return jsonify(new_review.to_dict()), 201
 
 
 # from flask import Blueprint, jsonify, request
