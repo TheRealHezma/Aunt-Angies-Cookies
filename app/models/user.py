@@ -16,6 +16,8 @@ class User(db.Model, UserMixin):
 
     # Relationship with cookie
     cookies = db.relationship('Cookie', backref='user', lazy=True)
+    # Relationship with reviews
+    reviews = db.relationship('Review', backref='user', lazy=True)
 
     @property
     def password(self):
