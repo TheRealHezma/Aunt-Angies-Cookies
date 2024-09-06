@@ -1,1 +1,7 @@
 /* TODO: Add sitewide styles */
+body {
+    margin: 0;
+    background-color: pink;
+    /* Set the default background color to pink */
+    font-family: Arial, sans-serif;
+}

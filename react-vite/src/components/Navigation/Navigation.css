@@ -1,3 +1,38 @@
 .profile-dropdown {
   position: absolute;
 }
+
+/* Navigation.css */
+
+.navigation-bar {
+  background-color: pink;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+li {
+  display: inline;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Optional: Profile Dropdown styles */
+.profile-dropdown {
+  position: absolute;
+}
