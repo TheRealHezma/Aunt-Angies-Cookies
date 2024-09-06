@@ -5,7 +5,7 @@
 /* Navigation.css */
 
 .navigation-bar {
-  background-color: pink;
+  background-color: rgb(233, 25, 60);
   padding: 10px;
   display: flex;
   justify-content: space-between;

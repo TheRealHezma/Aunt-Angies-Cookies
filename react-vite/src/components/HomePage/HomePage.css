@@ -4,6 +4,8 @@
     align-items: center;
     gap: 20px;
     margin: 20px;
+    background-color: pink;
+    /* Set background color for the entire page */
 }
 
 .homepage-content {
@@ -20,17 +22,31 @@
 
 .homepage-image {
     flex: 1;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    /* 3D shadow effect for images */
 }
 
 .homepage-image img {
     width: 100%;
     height: auto;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    /* Darker grey shadow */
+    display: block;
+    /* Ensure no extra space from inline elements */
+    margin: 0;
+    /* Remove any default margin */
 }
 
 .homepage-text {
     flex: 1;
-    padding: 0 20px;
+    padding: 20px;
+    background-color: #ffd1dc;
+    /* Lighter pink box for text area */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for text area */
 }
 
 button {
