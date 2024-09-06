@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { thunkGetCookieById, thunkDeleteCookie } from '../../redux/cookies';
@@ -13,10 +13,13 @@ function CookiesDescription() {
     const currentUser = useSelector(state => state.session.user);
     const reviews = useSelector(state => state.reviews);
 
+    const [editingReviewId, setEditingReviewId] = useState(null); // Track the review being edited
+    const [editReviewData, setEditReviewData] = useState({ review: '', stars: '' }); // Track the form data for the review
+
     useEffect(() => {
         if (id) {
             dispatch(thunkGetCookieById(id));
-            dispatch(getReviews(id));  // Fetch reviews for the cookie
+            dispatch(getReviews(id)); // Fetch reviews for the cookie
         }
     }, [dispatch, id]);
 
@@ -49,8 +52,20 @@ function CookiesDescription() {
         e.target.reset();
     };
 
-    const handleEditReview = async (reviewId, reviewData) => {
-        await dispatch(editReview(reviewId, reviewData));
+    const handleEditReview = (reviewId, reviewText, stars) => {
+        setEditingReviewId(reviewId); // Set the review ID to indicate it's being edited
+        setEditReviewData({ review: reviewText, stars: stars }); // Pre-populate the form
+    };
+
+    const handleSaveEditedReview = async (e, reviewId) => {
+        e.preventDefault();
+        const updatedReview = {
+            review: editReviewData.review,
+            stars: editReviewData.stars,
+        };
+
+        await dispatch(editReview(reviewId, updatedReview));
+        setEditingReviewId(null); // Exit edit mode after saving
     };
 
     const handleDeleteReview = async (reviewId) => {
@@ -63,7 +78,7 @@ function CookiesDescription() {
         return <p>No cookie found</p>;
     }
 
-    const isOwner = currentUser && cookie.ownerId === currentUser.id;
+    const isOwner = currentUser && cookie.user_id === currentUser.id;
 
     return (
         <div className="cookie-description">
@@ -86,25 +101,55 @@ function CookiesDescription() {
                     <ul>
                         {Object.values(reviews).map(review => (
                             <li key={review.id}>
-                                <p><strong>{review.username}</strong></p>
-                                <p>{review.review}</p>
-                                <p>Rating: {review.stars} stars</p>
+                                {editingReviewId === review.id ? (
+                                    // Editing mode: Show the form to edit the review
+                                    <form onSubmit={(e) => handleSaveEditedReview(e, review.id)}>
+                                        <textarea
+                                            name="review"
+                                            value={editReviewData.review}
+                                            onChange={(e) => setEditReviewData({ ...editReviewData, review: e.target.value })}
+                                            required
+                                        />
+                                        <select
+                                            name="stars"
+                                            value={editReviewData.stars}
+                                            onChange={(e) => setEditReviewData({ ...editReviewData, stars: e.target.value })}
+                                            required
+                                        >
+                                            <option value="">Rate this cookie</option>
+                                            <option value="1">1 star</option>
+                                            <option value="2">2 stars</option>
+                                            <option value="3">3 stars</option>
+                                            <option value="4">4 stars</option>
+                                            <option value="5">5 stars</option>
+                                        </select>
+                                        <button type="submit">Save Review</button>
+                                        <button type="button" onClick={() => setEditingReviewId(null)}>Cancel</button>
+                                    </form>
+                                ) : (
+                                    // View mode: Show the review text and edit/delete buttons
+                                    <>
+                                        <p><strong>{review.username}</strong></p>
+                                        <p>{review.review}</p>
+                                        <p>Rating: {review.stars} stars</p>
 
-                                {currentUser && currentUser.id === review.user_id && (
-                                    <div>
-                                        <button
-                                            onClick={() => handleEditReview(review.id, { review: 'Updated review text', stars: review.stars })}
-                                            className="edit-review-button"
-                                        >
-                                            Edit Review
-                                        </button>
-                                        <button
-                                            onClick={() => handleDeleteReview(review.id)}
-                                            className="delete-review-button"
-                                        >
-                                            Delete Review
-                                        </button>
-                                    </div>
+                                        {currentUser && currentUser.id === review.user_id && (
+                                            <div>
+                                                <button
+                                                    onClick={() => handleEditReview(review.id, review.review, review.stars)}
+                                                    className="edit-review-button"
+                                                >
+                                                    Edit Review
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteReview(review.id)}
+                                                    className="delete-review-button"
+                                                >
+                                                    Delete Review
+                                                </button>
+                                            </div>
+                                        )}
+                                    </>
                                 )}
                             </li>
                         ))}
@@ -113,7 +158,8 @@ function CookiesDescription() {
                     <p>No reviews yet. Be the first to review this cookie!</p>
                 )}
 
-                {currentUser && (
+                {/* Show the review form only if the user is not the cookie owner */}
+                {currentUser && !isOwner && (
                     <form onSubmit={handleReviewSubmit}>
                         <textarea name="review" placeholder="Write your review" required></textarea>
                         <select name="stars" required>

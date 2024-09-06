@@ -47,9 +47,9 @@ export const createReview = (cookieId, reviewData) => async (dispatch) => {
         },
         body: JSON.stringify(reviewData),
     });
-    console.log("AAAAAAAAAAAA", cookieId)
-    console.log('BBBBBBBBBBBBBB', reviewData)
-    console.log('Response object:', response);  // Log the response object
+    // console.log("AAAAAAAAAAAA", cookieId)
+    // console.log('BBBBBBBBBBBBBB', reviewData)
+    // console.log('Response object:', response);  // Log the response object
 
     if (response.ok) {
         const newReview = await response.json();
