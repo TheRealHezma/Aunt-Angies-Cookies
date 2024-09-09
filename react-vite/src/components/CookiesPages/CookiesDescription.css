@@ -1,37 +1,82 @@
-/* .cookie-description {
+.cookie-description {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 600px;
-    border-radius: 10px;
-    background-color: #f8f8f8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cookie-image {
+.reviews-section {
     width: 100%;
-    max-width: 400px;
-    height: auto;
+    max-width: 800px;
+    margin-top: 20px;
+    background-color: #ffc0cb;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.reviews-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    background-color: #ffc0cb;
+    padding: 10px;
+}
+
+/* Custom Scrollbar */
+.reviews-list::-webkit-scrollbar {
+    width: 8px;
+    /* Make the scrollbar thinner */
+}
+
+.reviews-list::-webkit-scrollbar-track {
+    background: #ffc0cb;
+    /* Match scrollbar track with section background */
     border-radius: 10px;
-    margin-bottom: 20px;
 }
 
-.cookie-description h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-    color: #333;
+.reviews-list::-webkit-scrollbar-thumb {
+    background-color: #ff69b4;
+    /* Customize the scrollbar thumb color */
+    border-radius: 10px;
+    border: 2px solid #ffc0cb;
+    /* Add space between scrollbar thumb and track */
 }
 
-.cookie-description p {
-    font-size: 1.2em;
-    color: #555;
-    margin-bottom: 10px;
-    text-align: center;
+.reviews-list::-webkit-scrollbar-thumb:hover {
+    background-color: #ff1493;
+    /* Darken thumb color on hover */
 }
 
-.cookie-description p:last-of-type {
-    font-weight: bold;
-    color: #000;
-} */
+.reviews-list li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffc0cb;
+    border-bottom: 1px solid #ccc;
+}
+
+.reviews-list li p {
+    margin: 5px 0;
+}
+
+.edit-review-button,
+.delete-review-button {
+    margin-right: 10px;
+}
+
+.edit-review-button:hover,
+.delete-review-button:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.scrollable-reviews {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
