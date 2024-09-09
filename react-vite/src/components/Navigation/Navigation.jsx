@@ -12,9 +12,11 @@ function Navigation() {
         <li>
           <NavLink to="/">About</NavLink>
         </li>
-        <li>
-          <NavLink to="/cookies">All Cookies</NavLink>
-        </li>
+        {user && ( // Only render this if user is logged in
+          <li>
+            <NavLink to="/cookies">All Cookies</NavLink>
+          </li>
+        )}
         <li>
           <ProfileButton />
         </li>
