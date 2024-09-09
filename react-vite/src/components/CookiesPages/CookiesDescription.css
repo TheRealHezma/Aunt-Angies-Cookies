@@ -64,15 +64,42 @@
     margin: 5px 0;
 }
 
+/* Edit and Delete Button Styles */
+.edit-button,
+.delete-button,
 .edit-review-button,
 .delete-review-button {
-    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.edit-review-button:hover,
+.edit-button,
+.edit-review-button {
+    background-color: #add8e6;
+    /* Light blue */
+}
+
+.edit-button:hover,
+.edit-review-button:hover {
+    background-color: #87ceeb;
+    /* Slightly darker blue on hover */
+}
+
+.delete-button,
+.delete-review-button {
+    background-color: #f44336;
+    /* Red */
+}
+
+.delete-button:hover,
 .delete-review-button:hover {
-    background-color: #eee;
-    cursor: pointer;
+    background-color: #d32f2f;
+    /* Slightly darker red on hover */
 }
 
 .scrollable-reviews {

@@ -4,6 +4,7 @@ const ADD_REVIEW = 'reviews/ADD_REVIEW';
 const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW';
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
 
+
 // Action Creators
 const loadReviews = (reviews) => ({
     type: LOAD_REVIEWS,
@@ -29,12 +30,27 @@ const deleteReview = (reviewId) => ({
 
 // Get reviews for a specific cookie
 export const getReviews = (cookieId) => async (dispatch) => {
-    const response = await fetch(`/api/cookies/${cookieId}/reviews`); // Corrected endpoint
-    if (response.ok) {
-        const reviews = await response.json();
-        dispatch(loadReviews(reviews));
-    } else {
-        console.error('Failed to load reviews');
+    try {
+        const response = await fetch(`/api/cookies/${cookieId}/reviews`); // Corrected endpoint
+        if (response.ok) {
+            const reviews = await response.json();
+            // Only dispatch if reviews exist
+            if (reviews.length > 0) {
+                dispatch(loadReviews(reviews));
+            } else {
+                // If no reviews are found, you can choose to dispatch an empty action or simply do nothing
+                // This will keep the reviews state as empty if no reviews are found
+                dispatch(loadReviews([])); // Dispatching empty array or object if needed
+            }
+        } else {
+            // Handle response errors gracefully, for example, by returning empty reviews
+            // console.warn('No reviews found or failed to load reviews'); // Changed to warn
+            dispatch(loadReviews([])); // Ensure reviews are cleared or set as empty
+        }
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        // Handle errors in fetch operation
+        dispatch(loadReviews([])); // Ensure reviews are cleared or set as empty
     }
 };
 
@@ -123,11 +139,14 @@ const initialState = {};
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
-            const newState = {};
-            action.reviews.forEach((review) => {
-                newState[review.id] = review;
-            });
-            return newState;
+            if (Array.isArray(action.reviews)) {
+                const newState = {};
+                action.reviews.forEach((review) => {
+                    newState[review.id] = review;
+                });
+                return newState;
+            }
+            return state; // If action.reviews is not an array, return current state
         }
         case ADD_REVIEW: {
             return {

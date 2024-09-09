@@ -143,10 +143,9 @@ function CookiesDescription() {
                                             <option value="4">4 stars</option>
                                             <option value="5">5 stars</option>
                                         </select>
-                                        <button type="submit">Save Review</button>
-                                        <button type="button" onClick={() => setEditingReviewId(null)}>Cancel</button>
-                                    </form>
-                                ) : (
+                                        <button type="submit" className="save-review-button">Save Review</button>
+                                        <button type="button" onClick={() => setEditingReviewId(null)} className="cancel-review-button">Cancel</button>
+                                    </form>) : (
                                     <>
                                         <p><strong>{review.username}</strong></p>
                                         <p>{review.review}</p>
