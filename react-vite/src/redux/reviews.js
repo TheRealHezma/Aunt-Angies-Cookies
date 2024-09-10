@@ -3,7 +3,7 @@ const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
 const ADD_REVIEW = 'reviews/ADD_REVIEW';
 const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW';
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
-
+const CLEAR_REVIEWS = 'reviews/CLEAR_REVIEWS'; //added
 
 // Action Creators
 const loadReviews = (reviews) => ({
@@ -24,6 +24,10 @@ const updateReview = (review) => ({
 const deleteReview = (reviewId) => ({
     type: DELETE_REVIEW,
     reviewId,
+});
+
+const clearReviews = () => ({ //added
+    type: CLEAR_REVIEWS,
 });
 
 // Thunks
@@ -133,20 +137,22 @@ export const removeReview = (reviewId) => async (dispatch) => {
     }
 };
 
+export const clearReviewsState = () => (dispatch) => { //added
+    dispatch(clearReviews());
+};
+
+
 // Reviews Reducer
 const initialState = {};
 
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_REVIEWS: {
-            if (Array.isArray(action.reviews)) {
-                const newState = {};
-                action.reviews.forEach((review) => {
-                    newState[review.id] = review;
-                });
-                return newState;
-            }
-            return state; // If action.reviews is not an array, return current state
+            const newState = {};
+            action.reviews.forEach((review) => {
+                newState[review.id] = review;
+            });
+            return newState;
         }
         case ADD_REVIEW: {
             return {
@@ -164,6 +170,9 @@ const reviewsReducer = (state = initialState, action) => {
             const newState = { ...state };
             delete newState[action.reviewId];
             return newState;
+        }
+        case CLEAR_REVIEWS: {
+            return {};
         }
         default:
             return state;

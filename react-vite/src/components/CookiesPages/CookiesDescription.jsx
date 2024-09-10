@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { thunkGetCookieById, thunkDeleteCookie } from '../../redux/cookies';
-import { getReviews, createReview, editReview, removeReview } from '../../redux/reviews';
+import { getReviews, createReview, editReview, removeReview, clearReviewsState } from '../../redux/reviews';
 import ConfirmDeleteModal from '../DeleteFormModal/ConfirmDeleteModal';
 import './CookiesDescription.css';
 
@@ -25,6 +25,10 @@ function CookiesDescription() {
             dispatch(thunkGetCookieById(id));
             dispatch(getReviews(id));
         }
+
+        return () => {
+            dispatch(clearReviewsState()); // Clear reviews when component unmounts
+        };
     }, [dispatch, id]);
 
     useEffect(() => {
@@ -44,6 +48,7 @@ function CookiesDescription() {
 
     const confirmDeleteCookie = async () => {
         await dispatch(thunkDeleteCookie(id));
+        dispatch(clearReviewsState()); // Clear reviews after deleting the cookie
         setShowDeleteCookieModal(false);
         navigate('/cookies');
     };
