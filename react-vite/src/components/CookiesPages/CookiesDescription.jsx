@@ -107,18 +107,22 @@ function CookiesDescription() {
     const hasUserReviewed = reviews && Object.values(reviews).some(review => review.user_id === currentUser?.id);
 
     return (
-        <div className="cookie-description">
-            <img src={cookie.imageUrl} alt={cookie.name} className="cookie-image" />
-            <h1>{cookie.name}</h1>
-            <p>{cookie.description}</p>
-            <p>Price: ${cookie.price.toFixed(2)}</p>
+        <div className="cookie-description-container">
+            <div className="cookie-description">
+                <img src={cookie.url} alt={cookie.name} className="cookie-image" />
+                <div className="cookie-details">
+                    <h1>{cookie.name}</h1>
+                    <p>{cookie.description}</p>
+                    <p className="price">Price: ${cookie.price.toFixed(2)}</p>
 
-            {isOwner && (
-                <div>
-                    <button onClick={handleEdit} className="edit-button">Edit</button>
-                    <button onClick={handleDeleteCookie} className="delete-button">Delete</button>
+                    {isOwner && (
+                        <div>
+                            <button onClick={handleEdit} className="edit-button">Edit</button>
+                            <button onClick={handleDeleteCookie} className="delete-button">Delete</button>
+                        </div>
+                    )}
                 </div>
-            )}
+            </div>
 
             {/* Reviews Section */}
             <div className="reviews-section">
@@ -150,7 +154,8 @@ function CookiesDescription() {
                                         </select>
                                         <button type="submit" className="save-review-button">Save Review</button>
                                         <button type="button" onClick={() => setEditingReviewId(null)} className="cancel-review-button">Cancel</button>
-                                    </form>) : (
+                                    </form>
+                                ) : (
                                     <>
                                         <p><strong>{review.username}</strong></p>
                                         <p>{review.review}</p>
@@ -193,11 +198,10 @@ function CookiesDescription() {
                             <option value="4">4 stars</option>
                             <option value="5">5 stars</option>
                         </select>
-                        <button type="submit">Submit Review</button>
+                        <button type="submit" className="submit-review-button">Submit Review</button>
                     </form>
                 )}
 
-                {/* If the user has already reviewed, show a message instead of the form */}
                 {hasUserReviewed && <p>You have already reviewed this cookie.</p>}
             </div>
 
@@ -220,8 +224,7 @@ function CookiesDescription() {
             )}
         </div>
     );
-}
-
+};
 export default CookiesDescription;
 
 
@@ -229,7 +232,7 @@ export default CookiesDescription;
 // import { useDispatch, useSelector } from 'react-redux';
 // import { useParams, useNavigate } from 'react-router-dom';
 // import { thunkGetCookieById, thunkDeleteCookie } from '../../redux/cookies';
-// import { getReviews, createReview, editReview, removeReview } from '../../redux/reviews';
+// import { getReviews, createReview, editReview, removeReview, clearReviewsState } from '../../redux/reviews';
 // import ConfirmDeleteModal from '../DeleteFormModal/ConfirmDeleteModal';
 // import './CookiesDescription.css';
 
@@ -243,7 +246,8 @@ export default CookiesDescription;
 
 //     const [editingReviewId, setEditingReviewId] = useState(null);
 //     const [editReviewData, setEditReviewData] = useState({ review: '', stars: '' });
-//     const [showDeleteModal, setShowDeleteModal] = useState(false);
+//     const [showDeleteCookieModal, setShowDeleteCookieModal] = useState(false);
+//     const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
 //     const [reviewToDelete, setReviewToDelete] = useState(null);
 
 //     useEffect(() => {
@@ -251,17 +255,32 @@ export default CookiesDescription;
 //             dispatch(thunkGetCookieById(id));
 //             dispatch(getReviews(id));
 //         }
+
+//         return () => {
+//             dispatch(clearReviewsState()); // Clear reviews when component unmounts
+//         };
 //     }, [dispatch, id]);
 
 //     useEffect(() => {
 //         console.log("Reviews updated:", reviews);
 //     }, [reviews]);
 
-//     const handleDelete = async () => {
-//         if (window.confirm('Are you sure you want to delete this cookie?')) {
-//             await dispatch(thunkDeleteCookie(id));
-//             navigate('/cookies');
+//     const handleDeleteCookie = () => {
+//         setShowDeleteCookieModal(true);
+//     };
+
+//     const handleDeleteReview = async () => {
+//         if (reviewToDelete) {
+//             await dispatch(removeReview(reviewToDelete));
+//             setShowDeleteReviewModal(false);
 //         }
+//     };
+
+//     const confirmDeleteCookie = async () => {
+//         await dispatch(thunkDeleteCookie(id));
+//         dispatch(clearReviewsState()); // Clear reviews after deleting the cookie
+//         setShowDeleteCookieModal(false);
+//         navigate('/cookies');
 //     };
 
 //     const handleEdit = () => {
@@ -298,21 +317,14 @@ export default CookiesDescription;
 //         setEditingReviewId(null);
 //     };
 
-//     const openDeleteModal = (reviewId) => {
+//     const openDeleteReviewModal = (reviewId) => {
 //         setReviewToDelete(reviewId);
-//         setShowDeleteModal(true);
+//         setShowDeleteReviewModal(true);
 //     };
 
-//     const closeDeleteModal = () => {
-//         setShowDeleteModal(false);
+//     const closeDeleteReviewModal = () => {
+//         setShowDeleteReviewModal(false);
 //         setReviewToDelete(null);
-//     };
-
-//     const confirmDeleteReview = async () => {
-//         if (reviewToDelete) {
-//             await dispatch(removeReview(reviewToDelete));
-//             closeDeleteModal();
-//         }
 //     };
 
 //     if (!cookie) {
@@ -334,7 +346,7 @@ export default CookiesDescription;
 //             {isOwner && (
 //                 <div>
 //                     <button onClick={handleEdit} className="edit-button">Edit</button>
-//                     <button onClick={handleDelete} className="delete-button">Delete</button>
+//                     <button onClick={handleDeleteCookie} className="delete-button">Delete</button>
 //                 </div>
 //             )}
 
@@ -366,10 +378,9 @@ export default CookiesDescription;
 //                                             <option value="4">4 stars</option>
 //                                             <option value="5">5 stars</option>
 //                                         </select>
-//                                         <button type="submit">Save Review</button>
-//                                         <button type="button" onClick={() => setEditingReviewId(null)}>Cancel</button>
-//                                     </form>
-//                                 ) : (
+//                                         <button type="submit" className="save-review-button">Save Review</button>
+//                                         <button type="button" onClick={() => setEditingReviewId(null)} className="cancel-review-button">Cancel</button>
+//                                     </form>) : (
 //                                     <>
 //                                         <p><strong>{review.username}</strong></p>
 //                                         <p>{review.review}</p>
@@ -384,7 +395,7 @@ export default CookiesDescription;
 //                                                     Edit Review
 //                                                 </button>
 //                                                 <button
-//                                                     onClick={() => openDeleteModal(review.id)}
+//                                                     onClick={() => openDeleteReviewModal(review.id)}
 //                                                     className="delete-review-button"
 //                                                 >
 //                                                     Delete Review
@@ -420,11 +431,20 @@ export default CookiesDescription;
 //                 {hasUserReviewed && <p>You have already reviewed this cookie.</p>}
 //             </div>
 
-//             {showDeleteModal && (
+//             {/* Confirm Delete Modals */}
+//             {showDeleteCookieModal && (
 //                 <ConfirmDeleteModal
-//                     isOpen={showDeleteModal}
-//                     onClose={closeDeleteModal}
-//                     onConfirm={confirmDeleteReview}
+//                     isOpen={showDeleteCookieModal}
+//                     onClose={() => setShowDeleteCookieModal(false)}
+//                     onConfirm={confirmDeleteCookie}
+//                     message="Are you sure you want to delete this cookie?"
+//                 />
+//             )}
+//             {showDeleteReviewModal && (
+//                 <ConfirmDeleteModal
+//                     isOpen={showDeleteReviewModal}
+//                     onClose={closeDeleteReviewModal}
+//                     onConfirm={handleDeleteReview}
 //                     message="Are you sure you want to delete this review?"
 //                 />
 //             )}

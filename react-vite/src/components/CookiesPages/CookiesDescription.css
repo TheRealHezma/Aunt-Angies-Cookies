@@ -1,13 +1,56 @@
-.cookie-description {
+.cookie-description-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+.cookie-description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.cookie-image {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.cookie-details {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cookie-details h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.cookie-details p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.cookie-details .price {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Reviews Section */
 .reviews-section {
     width: 100%;
     max-width: 800px;
-    margin-top: 20px;
+    margin-top: 40px;
     background-color: #ffc0cb;
     padding: 20px;
     border-radius: 8px;
@@ -29,26 +72,21 @@
 /* Custom Scrollbar */
 .reviews-list::-webkit-scrollbar {
     width: 8px;
-    /* Make the scrollbar thinner */
 }
 
 .reviews-list::-webkit-scrollbar-track {
     background: #ffc0cb;
-    /* Match scrollbar track with section background */
     border-radius: 10px;
 }
 
 .reviews-list::-webkit-scrollbar-thumb {
     background-color: #ff69b4;
-    /* Customize the scrollbar thumb color */
     border-radius: 10px;
     border: 2px solid #ffc0cb;
-    /* Add space between scrollbar thumb and track */
 }
 
 .reviews-list::-webkit-scrollbar-thumb:hover {
     background-color: #ff1493;
-    /* Darken thumb color on hover */
 }
 
 .reviews-list li {
@@ -81,29 +119,56 @@
 .edit-button,
 .edit-review-button {
     background-color: #add8e6;
-    /* Light blue */
 }
 
 .edit-button:hover,
 .edit-review-button:hover {
     background-color: #87ceeb;
-    /* Slightly darker blue on hover */
 }
 
 .delete-button,
 .delete-review-button {
     background-color: #f44336;
-    /* Red */
 }
 
 .delete-button:hover,
 .delete-review-button:hover {
     background-color: #d32f2f;
-    /* Slightly darker red on hover */
 }
 
 .scrollable-reviews {
     max-height: 400px;
     overflow-y: auto;
     padding-right: 10px;
+}
+
+/* Save and Cancel Review Buttons */
+.save-review-button {
+    background-color: lightblue;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-review-button:hover {
+    background-color: #ff69b4;
+}
+
+.cancel-review-button {
+    background-color: #f44336;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-review-button:hover {
+    background-color: #d32f2f;
 }

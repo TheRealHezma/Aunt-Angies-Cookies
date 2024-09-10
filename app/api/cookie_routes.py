@@ -39,15 +39,16 @@ def create_cookie():
     name = data.get('name')
     description = data.get('description')
     price = data.get('price')
-
-    if not name or not description or not price:
+    url = data.get('url')
+    if not name or not description or not price or not url:
         return jsonify({"message": "Please fill out all fields"}), 400
 
     new_cookie = Cookie(
         user_id=current_user.id,
         name=name,
         description=description,
-        price=price
+        price=price,
+        url = url
     )
 
     db.session.add(new_cookie)
@@ -73,6 +74,7 @@ def edit_cookie(id):
     cookie.name = data.get('name', cookie.name)
     cookie.description = data.get('description', cookie.description)
     cookie.price = data.get('price', cookie.price)
+    cookie.url = data.get('url', cookie.url)  # Include URL field
 
     db.session.commit()
 

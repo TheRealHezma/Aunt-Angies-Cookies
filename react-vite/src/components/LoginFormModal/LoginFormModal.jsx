@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import { thunkLogin, thunkDemoLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,15 @@ function LoginFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/cookies')
+      navigate('/cookies');
+    }
+  };
+
+  const handleDemoLogin = async () => {
+    const serverResponse = await dispatch(thunkDemoLogin());
+    if (!serverResponse) {
+      closeModal();
+      navigate('/cookies');
     }
   };
 
@@ -55,7 +63,8 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button type="submit" className="login-button">Log In</button>
+        <button type="button" onClick={handleDemoLogin} className="demo-button">Demo User</button>
       </form>
     </>
   );
