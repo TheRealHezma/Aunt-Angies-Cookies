@@ -3,6 +3,7 @@ const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
 const ADD_REVIEW = 'reviews/ADD_REVIEW';
 const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW';
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
+const CLEAR_REVIEWS = 'reviews/CLEAR_REVIEWS'; //added
 
 // Action Creators
 const loadReviews = (reviews) => ({
@@ -25,16 +26,35 @@ const deleteReview = (reviewId) => ({
     reviewId,
 });
 
+const clearReviews = () => ({ //added
+    type: CLEAR_REVIEWS,
+});
+
 // Thunks
 
 // Get reviews for a specific cookie
 export const getReviews = (cookieId) => async (dispatch) => {
-    const response = await fetch(`/api/cookies/${cookieId}/reviews`); // Corrected endpoint
-    if (response.ok) {
-        const reviews = await response.json();
-        dispatch(loadReviews(reviews));
-    } else {
-        console.error('Failed to load reviews');
+    try {
+        const response = await fetch(`/api/cookies/${cookieId}/reviews`); // Corrected endpoint
+        if (response.ok) {
+            const reviews = await response.json();
+            // Only dispatch if reviews exist
+            if (reviews.length > 0) {
+                dispatch(loadReviews(reviews));
+            } else {
+                // If no reviews are found, you can choose to dispatch an empty action or simply do nothing
+                // This will keep the reviews state as empty if no reviews are found
+                dispatch(loadReviews([])); // Dispatching empty array or object if needed
+            }
+        } else {
+            // Handle response errors gracefully, for example, by returning empty reviews
+            // console.warn('No reviews found or failed to load reviews'); // Changed to warn
+            dispatch(loadReviews([])); // Ensure reviews are cleared or set as empty
+        }
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        // Handle errors in fetch operation
+        dispatch(loadReviews([])); // Ensure reviews are cleared or set as empty
     }
 };
 
@@ -117,6 +137,11 @@ export const removeReview = (reviewId) => async (dispatch) => {
     }
 };
 
+export const clearReviewsState = () => (dispatch) => { //added
+    dispatch(clearReviews());
+};
+
+
 // Reviews Reducer
 const initialState = {};
 
@@ -145,6 +170,9 @@ const reviewsReducer = (state = initialState, action) => {
             const newState = { ...state };
             delete newState[action.reviewId];
             return newState;
+        }
+        case CLEAR_REVIEWS: {
+            return {};
         }
         default:
             return state;
