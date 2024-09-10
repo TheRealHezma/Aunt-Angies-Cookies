@@ -1,5 +1,6 @@
-/* Navigation.css */
+/* Adjusted styles for profile dropdown and user icon */
 
+/* Ensures the navigation bar is properly styled */
 .navigation-bar {
   background-color: lightblue;
   padding: 10px;
@@ -7,9 +8,9 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  /* Makes the navbar relative to position the user icon */
 }
 
+/* List items are displayed in a vertical column */
 ul {
   list-style-type: none;
   margin: 0;
@@ -19,10 +20,7 @@ ul {
   gap: 10px;
 }
 
-li {
-  display: block;
-}
-
+/* General styling for links */
 a {
   text-decoration: none;
   color: black;
@@ -32,18 +30,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Optional: Profile Dropdown styles */
-.profile-dropdown {
-  position: absolute;
-  top: 40px;
-  /* Adjust this value as necessary for the dropdown */
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Styles for the user icon */
 .user-icon {
   border-radius: 50%;
   display: flex;
@@ -51,17 +38,49 @@ a:hover {
   align-items: center;
   position: absolute;
   top: 10px;
-  /* Adjust this value to position the icon vertically */
   right: 20px;
-  /* Position the icon on the top right */
 }
 
 .user-icon svg {
   color: lightpink;
   font-size: 30px;
-  /* Adjusts the size of the user icon */
 }
 
 .user-icon:hover {
   background-color: #ffcccb;
+}
+
+/* Styles for the dropdown menu */
+.profile-dropdown {
+  position: absolute;
+  top: 40px;
+  /* Position it directly below the icon */
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Align text to the left */
+}
+
+.profile-dropdown li {
+  margin-bottom: 10px;
+  /* Space between user info */
+}
+
+.profile-dropdown button {
+  background-color: lightcoral;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+  background-color: red;
 }
