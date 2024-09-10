@@ -70,6 +70,8 @@ a:hover {
 .profile-dropdown li {
   margin-bottom: 10px;
   /* Space between user info */
+  cursor: pointer;
+
 }
 
 .profile-dropdown button {

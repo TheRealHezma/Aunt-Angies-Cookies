@@ -1,0 +1,15 @@
+.login-button,
+.demo-button {
+    background-color: lightblue;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button:hover,
+.demo-button:hover {
+    background-color: #add8e6;
+    /* Slightly darker light blue on hover */
+}
