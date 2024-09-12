@@ -68,3 +68,36 @@ button {
     color: #666;
     cursor: not-allowed;
 }
+
+.footer {
+    margin-top: 20px;
+    /* background-color: lightblue; */
+    padding: 10px;
+    text-align: center;
+    /* Center-align the text and links */
+    width: 100%;
+    /* Make sure the footer stretches across the full width */
+    position: relative;
+    /* Ensure it stays in its position */
+    bottom: 0;
+    /* Aligns the footer to the bottom */
+}
+
+.footer-links {
+    margin-top: 5px;
+}
+
+.footer a {
+    margin: 0 10px;
+    /* Add some space between the links */
+    text-decoration: none;
+    color: blue;
+    /* Set text color to blue */
+    font-weight: bold;
+}
+
+.footer a:hover {
+    color: darkblue;
+    /* Slightly darker blue on hover */
+    text-decoration: underline;
+}
