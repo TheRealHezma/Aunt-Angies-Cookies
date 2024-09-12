@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-
+import logo from '../../../public/Updatedlogo.png'
 function Navigation() {
   const user = useSelector((state) => state.session.user); // Access the user from the session state
 
