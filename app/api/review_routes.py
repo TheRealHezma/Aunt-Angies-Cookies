@@ -119,8 +119,12 @@ def edit_review(id):
     review.updated_at = datetime.now(timezone.utc)
 
     db.session.commit()
-    return jsonify(review.to_dict()), 200
 
+    # Include username in the response
+    review_dict = review.to_dict()
+    review_dict['username'] = current_user.username
+
+    return jsonify(review_dict), 200
 
 # Delete a review
 @review_routes.route('/<int:id>', methods=['DELETE'])

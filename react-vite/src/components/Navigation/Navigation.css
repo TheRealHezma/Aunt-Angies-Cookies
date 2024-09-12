@@ -1,5 +1,3 @@
-/* Adjusted styles for profile dropdown and user icon */
-
 /* Ensures the navigation bar is properly styled */
 .navigation-bar {
   background-color: lightblue;
@@ -10,23 +8,36 @@
   position: relative;
 }
 
-/* List items are displayed in a vertical column */
+.nav-logo {
+  width: 100px;
+  height: auto;
+}
+
+/* Align the About and Facebook links to the right of the logo */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  margin-left: 20px;
+  align-items: center;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
 }
 
 /* General styling for links */
-a {
+a,
+.nav-links a {
   text-decoration: none;
   color: black;
 }
 
-a:hover {
+a:hover,
+.nav-links a:hover {
   text-decoration: underline;
 }
 
@@ -71,7 +82,6 @@ a:hover {
   margin-bottom: 10px;
   /* Space between user info */
   cursor: pointer;
-
 }
 
 .profile-dropdown button {

@@ -27,7 +27,7 @@ function LoginFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/cookies');
+      navigate('/cookies'); // Redirect to /cookies after successful login
     }
   };
 
@@ -35,7 +35,7 @@ function LoginFormModal() {
     const serverResponse = await dispatch(thunkDemoLogin());
     if (!serverResponse) {
       closeModal();
-      navigate('/cookies');
+      navigate('/cookies'); // Redirect to /cookies after successful demo login
     }
   };
 

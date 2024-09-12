@@ -58,7 +58,26 @@ export default function HomePage() {
             >
                 {sessionUser ? 'See All Cookies' : 'Please Log In'}
             </button>
-            <footer>Creator: Hemza Mansour </footer>
+            <footer className="footer">
+                <p>Web Developer: Hemza Mansour</p>
+                <div className="footer-links">
+                    <a
+                        href="https://github.com/TheRealHezma"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Github
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/hemza-mansour-038a2521a/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        LinkedIn
+                    </a>
+                </div>
+            </footer>
+
         </div>
     );
 }

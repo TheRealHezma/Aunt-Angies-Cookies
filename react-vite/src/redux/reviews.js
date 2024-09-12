@@ -115,6 +115,7 @@ export const editReview = (reviewId, reviewData) => async (dispatch) => {
 
     if (response.ok) {
         const updatedReview = await response.json();
+        console.log("UPDATED REVIEW", updatedReview)
         dispatch(updateReview(updatedReview));
         return updatedReview;
     } else {
