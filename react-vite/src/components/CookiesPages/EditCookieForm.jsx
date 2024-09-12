@@ -13,6 +13,7 @@ function EditCookieForm() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [url, setUrl] = useState('');  // State for URL
+    const [urlError, setUrlError] = useState(''); // State to track URL validation error
 
     useEffect(() => {
         if (id) {
@@ -29,8 +30,20 @@ function EditCookieForm() {
         }
     }, [cookie]);
 
+    // Function to validate URL format using regex
+    const isValidUrl = (url) => {
+        const urlPattern = /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})(\/[\w\d\-_#]+\/?)*$/;
+        return urlPattern.test(url);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Check if the URL is valid
+        if (!isValidUrl(url)) {
+            setUrlError('Please enter a valid public URL.');
+            return;
+        }
 
         const updatedCookie = {
             id,  // Ensure the ID is included for updating
@@ -94,15 +107,28 @@ function EditCookieForm() {
                     type="text"
                     id="url"
                     value={url}
-                    onChange={(e) => setUrl(e.target.value)}
+                    onChange={(e) => {
+                        setUrl(e.target.value);
+                        setUrlError(''); // Reset error when the user types
+                    }}
+                    placeholder="Must be a public URL" // Set placeholder text
                     required
                 />
+                {urlError && <p style={{ color: 'red' }}>{urlError}</p>}
             </div>
 
-            <button type="submit" style={{ backgroundColor: 'lightblue', border: 'none', padding: '10px', margin: '5px' }}>
+            <button
+                type="submit"
+                style={{ backgroundColor: 'lightblue', border: 'none', padding: '10px', margin: '5px' }}
+                disabled={!url || urlError} // Disable if URL is invalid
+            >
                 Submit
             </button>
-            <button type="button" onClick={handleCancel} style={{ backgroundColor: 'red', color: 'white', border: 'none', padding: '10px', margin: '5px' }}>
+            <button
+                type="button"
+                onClick={handleCancel}
+                style={{ backgroundColor: 'red', color: 'white', border: 'none', padding: '10px', margin: '5px' }}
+            >
                 Cancel
             </button>
         </form>
