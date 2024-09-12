@@ -14,8 +14,12 @@ function CreateCookieButton() {
 
     // Function to validate URL format using regex
     const isValidUrl = (url) => {
-        const urlPattern = /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})(\/[\w\d\-_#]+\/?)*$/;
-        return urlPattern.test(url);
+        try {
+            new URL(url); // Using the URL constructor to validate
+            return true;
+        } catch {
+            return false;
+        }
     };
 
     const handleSubmit = async (e) => {
