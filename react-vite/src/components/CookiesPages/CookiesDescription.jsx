@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { thunkGetCookieById, thunkDeleteCookie } from '../../redux/cookies';
 import { getReviews, createReview, editReview, removeReview, clearReviewsState } from '../../redux/reviews';
 import ConfirmDeleteModal from '../DeleteFormModal/ConfirmDeleteModal';
+import { addItem, removeItem } from '../../redux/cartSlice';
 import './CookiesDescription.css';
 
 function CookiesDescription() {
@@ -30,10 +31,6 @@ function CookiesDescription() {
             dispatch(clearReviewsState()); // Clear reviews when component unmounts
         };
     }, [dispatch, id]);
-
-    useEffect(() => {
-        console.log("Reviews updated:", reviews);
-    }, [reviews]);
 
     const handleDeleteCookie = () => {
         setShowDeleteCookieModal(true);
@@ -71,30 +68,14 @@ function CookiesDescription() {
         e.target.reset();
     };
 
-    const handleEditReview = (reviewId, reviewText, stars) => {
-        setEditingReviewId(reviewId);
-        setEditReviewData({ review: reviewText, stars: stars });
-    };
-
-    const handleSaveEditedReview = async (e, reviewId) => {
-        e.preventDefault();
-        const updatedReview = {
-            review: editReviewData.review,
-            stars: editReviewData.stars,
+    const handleAddToCart = () => {
+        const cookieToAdd = {
+            id: cookie.id,
+            name: cookie.name,
+            price: cookie.price,
+            url: cookie.url,
         };
-
-        await dispatch(editReview(reviewId, updatedReview));
-        setEditingReviewId(null);
-    };
-
-    const openDeleteReviewModal = (reviewId) => {
-        setReviewToDelete(reviewId);
-        setShowDeleteReviewModal(true);
-    };
-
-    const closeDeleteReviewModal = () => {
-        setShowDeleteReviewModal(false);
-        setReviewToDelete(null);
+        dispatch(addItem(cookieToAdd));
     };
 
     if (!cookie) {
@@ -102,11 +83,7 @@ function CookiesDescription() {
     }
 
     const isOwner = currentUser && cookie.user_id === currentUser.id;
-
-    // Check if current user has already posted a review for this cookie
     const hasUserReviewed = reviews && Object.values(reviews).some(review => review.user_id === currentUser?.id);
-
-
 
     return (
         <div className="cookie-description-container">
@@ -115,8 +92,8 @@ function CookiesDescription() {
                 <div className="cookie-details">
                     <h1>{cookie.name}</h1>
                     <p>{cookie.description}</p>
-                    <p className="price">Price: ${cookie.price.toFixed(2)}</p>
-
+                    <p className="price">Price: ${cookie.price.toFixed(2)} /dozen</p>
+                    <button className="add_to_cart_button" onClick={handleAddToCart}>Add to cart</button>
                     {isOwner && (
                         <div>
                             <button onClick={handleEdit} className="edit-button">Edit</button>

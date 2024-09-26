@@ -1,4 +1,5 @@
-/* Ensures the navigation bar is properly styled */
+/* CSS for Navigation component */
+
 .navigation-bar {
   background-color: lightblue;
   padding: 10px;
@@ -65,7 +66,6 @@ a:hover,
 .profile-dropdown {
   position: absolute;
   top: 40px;
-  /* Position it directly below the icon */
   right: 20px;
   background-color: white;
   border: 1px solid #ccc;
@@ -75,12 +75,10 @@ a:hover,
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* Align text to the left */
 }
 
 .profile-dropdown li {
   margin-bottom: 10px;
-  /* Space between user info */
   cursor: pointer;
 }
 
@@ -95,4 +93,93 @@ a:hover,
 
 .profile-dropdown button:hover {
   background-color: red;
+}
+
+/* Styling for the shopping cart */
+.shopping-cart {
+  position: relative;
+}
+
+.cart-dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 250px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.cart-dropdown h3 {
+  margin-top: 0;
+}
+
+.cart-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-dropdown li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Make cart items scrollable if there are too many items */
+.cart-items {
+  max-height: 150px;
+  flex-direction: column;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+/* Adjust size of the cart item image */
+.cart-item-image {
+  width: calc(75% + 5px);
+  height: auto;
+}
+
+.remove-item-button {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.remove-item-button:hover {
+  background-color: #ff4500;
+}
+
+.checkout-button {
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.checkout-button:hover {
+  background-color: blue;
+}
+
+/* Scrollbar customization for the cart */
+.cart-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cart-items::-webkit-scrollbar-thumb {
+  background-color: lightblue;
+  border-radius: 3px;
 }
