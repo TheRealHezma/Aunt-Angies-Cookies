@@ -21,6 +21,9 @@ function CookiesDescription() {
     const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
 
+    // New states for "Add to Cart" button
+    const [addedToCart, setAddedToCart] = useState(false);
+
     useEffect(() => {
         if (id) {
             dispatch(thunkGetCookieById(id));
@@ -76,6 +79,10 @@ function CookiesDescription() {
             url: cookie.url,
         };
         dispatch(addItem(cookieToAdd));
+
+        // Update button to "Added" for 3 seconds
+        setAddedToCart(true);
+        setTimeout(() => setAddedToCart(false), 3000); // Reset after 3 seconds
     };
 
     if (!cookie) {
@@ -93,7 +100,13 @@ function CookiesDescription() {
                     <h1>{cookie.name}</h1>
                     <p>{cookie.description}</p>
                     <p className="price">Price: ${cookie.price.toFixed(2)} /dozen</p>
-                    <button className="add_to_cart_button" onClick={handleAddToCart}>Add to cart</button>
+                    <button
+                        className={`add_to_cart_button ${addedToCart ? 'added' : ''}`}
+                        onClick={handleAddToCart}
+                        disabled={addedToCart}
+                    >
+                        {addedToCart ? 'Added' : 'Add to cart'}
+                    </button>
                     {isOwner && (
                         <div>
                             <button onClick={handleEdit} className="edit-button">Edit</button>
@@ -102,7 +115,6 @@ function CookiesDescription() {
                     )}
                 </div>
             </div>
-
 
             {/* Reviews Section */}
             <div className="reviews-section">
@@ -137,7 +149,6 @@ function CookiesDescription() {
                                     </form>
                                 ) : (
                                     <>
-                                        {/* check here */}
                                         <p><strong>{review.username}</strong></p>
                                         <p>{review.review}</p>
                                         <p>Rating: {review.stars} stars</p>
