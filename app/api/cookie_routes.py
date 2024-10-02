@@ -2,37 +2,37 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Cookie, Review, User
 from datetime import datetime, timezone
-from flask_mail import Message
+# from flask_mail import Message
 
 cookie_routes = Blueprint('cookies', __name__)
 
-##TESTIN MAIL
-@cookie_routes.route('/checkout', methods=['POST'])
-def handle_checkout():
-    from app import mail
+# ##TESTIN MAIL
+# @cookie_routes.route('/checkout', methods=['POST'])
+# def handle_checkout():
+#     from app import mail
 
-    cart_items = request.json.get('cartItems')
+#     cart_items = request.json.get('cartItems')
 
-    if not cart_items:
-        return jsonify({"error": "No items in cart"}), 400
+#     if not cart_items:
+#         return jsonify({"error": "No items in cart"}), 400
 
-    # Format the cart items for the email body
-    item_list = "\n".join([f"{item['name']} - Quantity: {item['quantity']}" for item in cart_items])
+#     # Format the cart items for the email body
+#     item_list = "\n".join([f"{item['name']} - Quantity: {item['quantity']}" for item in cart_items])
 
-    # Create email content
-    msg = Message(
-        'New Order Confirmation',
-        recipients=['hezmam6@gmail.com'],  # Send the email to yourself or a desired recipient
-        body=f'You have a new order with the following items:\n\n{item_list}'
-    )
+#     # Create email content
+#     msg = Message(
+#         'New Order Confirmation',
+#         recipients=['hezmam6@gmail.com'],  # Send the email to yourself or a desired recipient
+#         body=f'You have a new order with the following items:\n\n{item_list}'
+#     )
 
-    try:
-        # Send the email
-        mail.send(msg)
-        return jsonify({"message": "Order placed and email sent successfully"}), 200
-    except Exception as e:
-        print(f"Failed to send email: {e}")
-        return jsonify({"error": "Failed to send email"}), 500
+#     try:
+#         # Send the email
+#         mail.send(msg)
+#         return jsonify({"message": "Order placed and email sent successfully"}), 200
+#     except Exception as e:
+#         print(f"Failed to send email: {e}")
+#         return jsonify({"error": "Failed to send email"}), 500
 ##END OF MAIL CODE
 
 # Get All Cookies
