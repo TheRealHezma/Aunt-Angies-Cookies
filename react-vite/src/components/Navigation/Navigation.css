@@ -1,5 +1,4 @@
 /* CSS for Navigation component */
-
 .navigation-bar {
   background-color: lightblue;
   padding: 10px;
@@ -14,20 +13,32 @@
   height: auto;
 }
 
-/* Align the About and Facebook links to the right of the logo */
-.nav-links {
+/* Align links, cart, and profile buttons in the same row */
+.nav-links,
+.shopping-cart,
+.profile-button {
   display: flex;
   gap: 20px;
-  margin-left: 20px;
+  /* Adds consistent spacing between elements */
   align-items: center;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+/* Ensure that links are horizontally aligned */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.shopping-cart {
   display: flex;
   align-items: center;
+}
+
+/* Adjust margin to keep profile button and cart aligned */
+.profile-button {
+  margin-left: 20px;
 }
 
 /* General styling for links */
@@ -100,10 +111,24 @@ a:hover,
   position: relative;
 }
 
+/* Cart Button styling */
+.cart-button {
+  background-color: lightblue;
+  padding: 10px;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.cart-button:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown cart styling */
 .cart-dropdown {
   position: absolute;
-  right: 0;
   top: 40px;
+  right: 0;
   width: 250px;
   background-color: white;
   border: 1px solid #ccc;
@@ -113,24 +138,6 @@ a:hover,
   z-index: 100;
 }
 
-.cart-dropdown h3 {
-  margin-top: 0;
-}
-
-.cart-dropdown ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.cart-dropdown li {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-/* Make cart items scrollable if there are too many items */
 .cart-items {
   max-height: 250px;
   flex-direction: column;
@@ -182,4 +189,19 @@ a:hover,
 .cart-items::-webkit-scrollbar-thumb {
   background-color: lightblue;
   border-radius: 3px;
+}
+
+/* Other general styles (if any) */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon {
+  font-size: 24px;
+  /* Adjust size as needed */
+  color: black;
 }

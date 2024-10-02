@@ -200,3 +200,7 @@
     background-color: lightblue;
     color: white
 }
+
+.add_to_cart_button:hover {
+    background-color: #87cefa;
+}

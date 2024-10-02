@@ -7,3 +7,4 @@ __pycache__/
 .pylintrc
 .dev.db
 # Might need to remove later
+node_modules
