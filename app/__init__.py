@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from flask_mail import Mail, Message #trying to send emails
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
@@ -12,11 +13,45 @@ from .api.review_routes import review_routes
 from .seeds import seed_commands
 from .config import Config
 
+
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
+
+# Setup mail configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')  # Use environment variable
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')  # Use environment variable
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER')  # Use environment variable
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+# Initialize Flask-Mail
+mail = Mail(app)
+
+@app.route('/api/send_checkout_email', methods=['POST'])
+def send_checkout_email():
+    data = request.json
+    cart_items = data.get('cartItems', [])
+
+    # Generate email content
+    item_list = "\n".join([f"{item['name']} (Quantity: {item['quantity']})" for item in cart_items])
+    email_body = f"Thank you for your purchase! Here are the items in your order:\n\n{item_list}"
+
+    msg = Message('Your Cookie Order Confirmation',
+                  sender=app.config['MAIL_DEFAULT_SENDER'],
+                  recipients=[os.environ.get('MAIL_DEFAULT_SENDER')])  # Send to the email address configured
+
+    msg.body = email_body
+    try:
+        mail.send(msg)
+        return {'message': 'Email sent successfully'}, 200
+    except Exception as e:
+        return {'message': f'Failed to send email: {str(e)}'}, 500
+        ##END OF MAIL
 
 
 @login.user_loader

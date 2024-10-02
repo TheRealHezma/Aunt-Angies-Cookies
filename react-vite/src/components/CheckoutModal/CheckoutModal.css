@@ -1,0 +1,51 @@
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-item-image {
+    width: 100px;
+    /* Adjust size as needed */
+    height: 100px;
+    margin-right: 10px;
+    /* Space between image and item details */
+    object-fit: cover;
+    /* Ensure the image doesn't stretch */
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-checkout-button,
+.modal-cancel-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-checkout-button {
+    background-color: lightblue;
+    color: white;
+}
+
+.modal-cancel-button {
+    background-color: lightcoral;
+    color: white;
+}
+
+.modal-checkout-button:hover {
+    background-color: blue;
+}
+
+.modal-cancel-button:hover {
+    background-color: red;
+}

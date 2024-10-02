@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
         path: "cookies/new", // New path for creating a cookie
         element: <CreateCookieForm />,
       },
+      // {
+      //   path: "/checkout",
+      //   element:
+      // },
       {
         path: "cookies/:id/edit",
         element: <EditCookieForm />

@@ -195,3 +195,12 @@
     background-color: #87cefa;
     /* Slightly darker blue on hover */
 }
+
+.add_to_cart_button {
+    background-color: lightblue;
+    color: white
+}
+
+.add_to_cart_button:hover {
+    background-color: #87cefa;
+}

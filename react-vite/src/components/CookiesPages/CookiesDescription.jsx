@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { thunkGetCookieById, thunkDeleteCookie } from '../../redux/cookies';
 import { getReviews, createReview, editReview, removeReview, clearReviewsState } from '../../redux/reviews';
 import ConfirmDeleteModal from '../DeleteFormModal/ConfirmDeleteModal';
+import { addItem, removeItem } from '../../redux/cartSlice';
 import './CookiesDescription.css';
 
 function CookiesDescription() {
@@ -20,6 +21,9 @@ function CookiesDescription() {
     const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
 
+    // New states for "Add to Cart" button
+    const [addedToCart, setAddedToCart] = useState(false);
+
     useEffect(() => {
         if (id) {
             dispatch(thunkGetCookieById(id));
@@ -30,10 +34,6 @@ function CookiesDescription() {
             dispatch(clearReviewsState()); // Clear reviews when component unmounts
         };
     }, [dispatch, id]);
-
-    useEffect(() => {
-        console.log("Reviews updated:", reviews);
-    }, [reviews]);
 
     const handleDeleteCookie = () => {
         setShowDeleteCookieModal(true);
@@ -71,30 +71,18 @@ function CookiesDescription() {
         e.target.reset();
     };
 
-    const handleEditReview = (reviewId, reviewText, stars) => {
-        setEditingReviewId(reviewId);
-        setEditReviewData({ review: reviewText, stars: stars });
-    };
-
-    const handleSaveEditedReview = async (e, reviewId) => {
-        e.preventDefault();
-        const updatedReview = {
-            review: editReviewData.review,
-            stars: editReviewData.stars,
+    const handleAddToCart = () => {
+        const cookieToAdd = {
+            id: cookie.id,
+            name: cookie.name,
+            price: cookie.price,
+            url: cookie.url,
         };
+        dispatch(addItem(cookieToAdd));
 
-        await dispatch(editReview(reviewId, updatedReview));
-        setEditingReviewId(null);
-    };
-
-    const openDeleteReviewModal = (reviewId) => {
-        setReviewToDelete(reviewId);
-        setShowDeleteReviewModal(true);
-    };
-
-    const closeDeleteReviewModal = () => {
-        setShowDeleteReviewModal(false);
-        setReviewToDelete(null);
+        // Update button to "Added" for 3 seconds
+        setAddedToCart(true);
+        setTimeout(() => setAddedToCart(false), 3000); // Reset after 3 seconds
     };
 
     if (!cookie) {
@@ -102,11 +90,7 @@ function CookiesDescription() {
     }
 
     const isOwner = currentUser && cookie.user_id === currentUser.id;
-
-    // Check if current user has already posted a review for this cookie
     const hasUserReviewed = reviews && Object.values(reviews).some(review => review.user_id === currentUser?.id);
-
-
 
     return (
         <div className="cookie-description-container">
@@ -115,8 +99,14 @@ function CookiesDescription() {
                 <div className="cookie-details">
                     <h1>{cookie.name}</h1>
                     <p>{cookie.description}</p>
-                    <p className="price">Price: ${cookie.price.toFixed(2)}</p>
-
+                    <p className="price">Price: ${cookie.price.toFixed(2)} /dozen</p>
+                    <button
+                        className={`add_to_cart_button ${addedToCart ? 'added' : ''}`}
+                        onClick={handleAddToCart}
+                        disabled={addedToCart}
+                    >
+                        {addedToCart ? 'Added' : 'Add to cart'}
+                    </button>
                     {isOwner && (
                         <div>
                             <button onClick={handleEdit} className="edit-button">Edit</button>
@@ -125,7 +115,6 @@ function CookiesDescription() {
                     )}
                 </div>
             </div>
-
 
             {/* Reviews Section */}
             <div className="reviews-section">
@@ -160,7 +149,6 @@ function CookiesDescription() {
                                     </form>
                                 ) : (
                                     <>
-                                        {/* check here */}
                                         <p><strong>{review.username}</strong></p>
                                         <p>{review.review}</p>
                                         <p>Rating: {review.stars} stars</p>
