@@ -6,6 +6,7 @@ import { getReviews, createReview, editReview, removeReview, clearReviewsState }
 import ConfirmDeleteModal from '../DeleteFormModal/ConfirmDeleteModal';
 import { addItem, removeItem } from '../../redux/cartSlice';
 import './CookiesDescription.css';
+import StarRating from './StarRating'; // Import StarRating component
 
 function CookiesDescription() {
     const { id } = useParams();
@@ -20,8 +21,6 @@ function CookiesDescription() {
     const [showDeleteCookieModal, setShowDeleteCookieModal] = useState(false);
     const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
     const [reviewToDelete, setReviewToDelete] = useState(null);
-
-    // New states for "Add to Cart" button
     const [addedToCart, setAddedToCart] = useState(false);
 
     useEffect(() => {
@@ -31,7 +30,7 @@ function CookiesDescription() {
         }
 
         return () => {
-            dispatch(clearReviewsState()); // Clear reviews when component unmounts
+            dispatch(clearReviewsState());
         };
     }, [dispatch, id]);
 
@@ -48,7 +47,7 @@ function CookiesDescription() {
 
     const confirmDeleteCookie = async () => {
         await dispatch(thunkDeleteCookie(id));
-        dispatch(clearReviewsState()); // Clear reviews after deleting the cookie
+        dispatch(clearReviewsState());
         setShowDeleteCookieModal(false);
         navigate('/cookies');
     };
@@ -60,7 +59,7 @@ function CookiesDescription() {
     const handleReviewSubmit = async (e) => {
         e.preventDefault();
         const review = e.target.review.value;
-        const stars = e.target.stars.value;
+        const stars = editReviewData.stars;
 
         const newReview = {
             review,
@@ -80,9 +79,39 @@ function CookiesDescription() {
         };
         dispatch(addItem(cookieToAdd));
 
-        // Update button to "Added" for 3 seconds
         setAddedToCart(true);
-        setTimeout(() => setAddedToCart(false), 3000); // Reset after 3 seconds
+        setTimeout(() => setAddedToCart(false), 3000);
+    };
+
+    const handleSaveEditedReview = async (e, reviewId) => {
+        e.preventDefault();
+
+        const updatedReview = {
+            review: editReviewData.review,
+            stars: editReviewData.stars,
+        };
+
+        await dispatch(editReview(reviewId, updatedReview));
+        setEditingReviewId(null);
+    };
+
+    const handleEditReview = (reviewId, reviewText, stars) => {
+        setEditingReviewId(reviewId);
+        setEditReviewData({ review: reviewText, stars });
+    };
+
+    const openDeleteReviewModal = (reviewId) => {
+        setReviewToDelete(reviewId);
+        setShowDeleteReviewModal(true);
+    };
+
+    const closeDeleteReviewModal = () => {
+        setShowDeleteReviewModal(false);
+        setReviewToDelete(null);
+    };
+
+    const handleStarChange = (newStars) => {
+        setEditReviewData({ ...editReviewData, stars: newStars });
     };
 
     if (!cookie) {
@@ -131,28 +160,16 @@ function CookiesDescription() {
                                             onChange={(e) => setEditReviewData({ ...editReviewData, review: e.target.value })}
                                             required
                                         />
-                                        <select
-                                            name="stars"
-                                            value={editReviewData.stars}
-                                            onChange={(e) => setEditReviewData({ ...editReviewData, stars: e.target.value })}
-                                            required
-                                        >
-                                            <option value="">Rate this cookie</option>
-                                            <option value="1">1 star</option>
-                                            <option value="2">2 stars</option>
-                                            <option value="3">3 stars</option>
-                                            <option value="4">4 stars</option>
-                                            <option value="5">5 stars</option>
-                                        </select>
+                                        <StarRating rating={editReviewData.stars} onChange={handleStarChange} />
                                         <button type="submit" className="save-review-button">Save Review</button>
                                         <button type="button" onClick={() => setEditingReviewId(null)} className="cancel-review-button">Cancel</button>
                                     </form>
                                 ) : (
-                                    <>
+                                    <div className='theReview'>
                                         <p><strong>{review.username}</strong></p>
                                         <p>{review.review}</p>
                                         <p>Rating: {review.stars} stars</p>
-
+                                        <StarRating rating={review.stars} onChange={() => { }} />
                                         {currentUser && currentUser.id === review.user_id && (
                                             <div>
                                                 <button
@@ -169,7 +186,7 @@ function CookiesDescription() {
                                                 </button>
                                             </div>
                                         )}
-                                    </>
+                                    </div>
                                 )}
                             </li>
                         ))}
@@ -178,18 +195,11 @@ function CookiesDescription() {
                     <p>No reviews yet. Be the first to review this cookie!</p>
                 )}
 
-                {/* Show the review form only if the user hasn't already reviewed the cookie and isn't the owner */}
+                {/* Review Form */}
                 {currentUser && !isOwner && !hasUserReviewed && (
-                    <form onSubmit={handleReviewSubmit}>
+                    <form className='review-form' onSubmit={handleReviewSubmit}>
                         <textarea name="review" placeholder="Write your review" required></textarea>
-                        <select name="stars" required>
-                            <option value="">Rate this cookie</option>
-                            <option value="1">1 star</option>
-                            <option value="2">2 stars</option>
-                            <option value="3">3 stars</option>
-                            <option value="4">4 stars</option>
-                            <option value="5">5 stars</option>
-                        </select>
+                        <StarRating rating={editReviewData.stars} onChange={handleStarChange} />
                         <button type="submit" className="submit-review-button">Submit Review</button>
                     </form>
                 )}
@@ -216,5 +226,6 @@ function CookiesDescription() {
             )}
         </div>
     );
-};
+}
+
 export default CookiesDescription;

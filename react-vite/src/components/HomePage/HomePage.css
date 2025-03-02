@@ -71,16 +71,11 @@ button {
 
 .footer {
     margin-top: 20px;
-    /* background-color: lightblue; */
     padding: 10px;
     text-align: center;
-    /* Center-align the text and links */
     width: 100%;
-    /* Make sure the footer stretches across the full width */
     position: relative;
-    /* Ensure it stays in its position */
     bottom: 0;
-    /* Aligns the footer to the bottom */
 }
 
 .footer-links {
@@ -89,15 +84,127 @@ button {
 
 .footer a {
     margin: 0 10px;
-    /* Add some space between the links */
     text-decoration: none;
     color: blue;
-    /* Set text color to blue */
     font-weight: bold;
 }
 
 .footer a:hover {
     color: darkblue;
-    /* Slightly darker blue on hover */
     text-decoration: underline;
+}
+
+.contact-style {
+    display: flex;
+    justify-content: space-around;
+    /* Evenly distribute elements */
+    align-items: center;
+    background-color: #87cefa;
+    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 900px;
+    /* Limit max size */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: auto;
+    /* Center it horizontally */
+    flex-wrap: wrap;
+    /* Prevent overflow on small screens */
+}
+
+.contact-container,
+.time {
+    background-color: #ffd1dc;
+    width: 30%;
+    /* Each section takes up 30% */
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.facebook {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    /* Increased size */
+    height: 100px;
+    background-color: white;
+    border-radius: 50%;
+    /* Make it circular */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.facebook a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.facebook svg {
+    font-size: 48px !important;
+    /* Increase icon size */
+    color: black;
+}
+
+/* Responsive: Stack on smaller screens */
+@media screen and (max-width: 768px) {
+    .contact-style {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-container,
+    .time {
+        width: 80%;
+    }
+}
+
+
+
+
+.cookie {
+    position: absolute;
+    top: -50px;
+    /* Start above the screen */
+    width: 150px;
+    /* Increased size */
+    height: 150px;
+    /* Increased size */
+    background-image: url('../../../public/falldown-logo.png');
+    background-size: contain;
+    /* Ensure image scales without cutting off */
+    background-position: center;
+    /* Center image */
+    background-repeat: no-repeat;
+    animation: fall 4s linear forwards;
+    pointer-events: none;
+    /* So it doesn't interfere with clicks */
+}
+
+/* Falling and rotating animation combined */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        /* Start at top, no rotation */
+        opacity: 1;
+        /* Start fully visible */
+    }
+
+    80% {
+        transform: translateY(calc(100vh + 100px)) rotate(180deg);
+        /* Move down and rotate halfway */
+        opacity: 1;
+        /* Keep full opacity longer */
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100px)) rotate(360deg);
+        /* End at bottom, full rotation */
+        opacity: 0;
+        /* Fade out */
+    }
 }

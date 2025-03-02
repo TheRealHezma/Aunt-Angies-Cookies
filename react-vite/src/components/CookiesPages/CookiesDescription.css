@@ -1,7 +1,7 @@
 .cookie-description-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
 }
 
@@ -27,7 +27,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .cookie-details h1 {
@@ -54,19 +54,14 @@
     background-color: #ffc0cb;
     padding: 20px;
     border-radius: 8px;
+    margin-left: 0;
 }
 
 .reviews-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    background-color: #ffc0cb;
-    padding: 10px;
+    align-items: flex-start;
+    /* Aligns reviews to the left */
 }
 
 /* Custom Scrollbar */
@@ -93,14 +88,15 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    padding: 10px;
+    padding-left: 0;
+    /* Remove left padding */
     background-color: #ffc0cb;
     border-bottom: 1px solid #ccc;
+    text-align: left;
 }
 
 .reviews-list li p {
     margin: 5px 0;
-    /*here*/
 }
 
 /* Edit and Delete Button Styles */
@@ -203,4 +199,44 @@
 
 .add_to_cart_button:hover {
     background-color: #87cefa;
+}
+
+
+
+
+
+
+
+.theReview {
+    background-color: #87cefa;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
+    text-align: left !important;
+    /* Ensures text is aligned to the left */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Aligns all content to the left */
+    margin-left: 0 !important;
+}
+
+.theReview p,
+.theReview strong,
+.theReview div {
+    text-align: left;
+    width: 100%;
+    /* Ensures elements take up full width and align left */
+}
+
+.theReview div {
+    display: flex;
+    gap: 5px;
+}
+
+
+.review-form {
+    background-color: grey;
 }

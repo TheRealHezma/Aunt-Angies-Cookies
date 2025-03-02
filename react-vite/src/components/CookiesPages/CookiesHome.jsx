@@ -17,6 +17,58 @@ function CookiesHome() {
         navigate('/cookies/new'); // This assumes you have a route for creating a new cookie
     };
 
+    function rainCookies() {
+        const numCookies = 10;
+        const cookies = [];
+
+        for (let i = 0; i < numCookies; i++) {
+            const cookie = document.createElement("div");
+            cookie.classList.add("cookie");
+
+            // Initially hide the cookie
+            cookie.style.display = "none";
+
+            // Random horizontal position
+            cookie.style.left = Math.random() * window.innerWidth + "px";
+
+            // Random delay before starting the animation
+            const delay = Math.random() * 2 + "s"; // Random delay between 0 and 2 seconds
+
+            // Set the random animation duration
+            cookie.style.animationDuration = 2.5 + Math.random() * 1 + "s";
+
+            // After the delay, make the cookie visible and start the animation
+            setTimeout(() => {
+                cookie.style.display = "block"; // Make the cookie visible
+            }, Math.random() * 2 * 1000); // Random delay before the cookie is visible
+
+            // Append to body
+            document.body.appendChild(cookie);
+            cookies.push(cookie);
+
+            // Remove cookie after animation ends
+            setTimeout(() => {
+                cookie.remove();
+            }, 5000);
+        }
+
+        // Clean up cookies when component unmounts
+        return () => {
+            cookies.forEach(cookie => cookie.remove());
+        };
+    }
+
+    useEffect(() => {
+        const cleanup = rainCookies();
+        return cleanup;
+    }, []);
+
+    useEffect(() => {
+        const cleanup = rainCookies();
+        return cleanup;
+    }, []);
+
+
     return (
         <div>
             <div className="create-cookie-button-container">

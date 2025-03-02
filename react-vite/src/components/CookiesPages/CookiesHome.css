@@ -41,3 +41,47 @@
 .create-cookie-button:hover {
     background-color: #87cefa;
 }
+
+
+.cookie {
+    position: absolute;
+    top: -50px;
+    /* Start above the screen */
+    width: 150px;
+    /* Increased size */
+    height: 150px;
+    /* Increased size */
+    background-image: url('../../../public/falldown-logo.png');
+    background-size: contain;
+    /* Ensure image scales without cutting off */
+    background-position: center;
+    /* Center image */
+    background-repeat: no-repeat;
+    animation: fall 4s linear forwards;
+    pointer-events: none;
+    /* So it doesn't interfere with clicks */
+}
+
+/* Falling and rotating animation combined */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        /* Start at top, no rotation */
+        opacity: 1;
+        /* Start fully visible */
+    }
+
+    80% {
+        transform: translateY(calc(100vh + 100px)) rotate(180deg);
+        /* Move down and rotate halfway */
+        opacity: 1;
+        /* Keep full opacity longer */
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100px)) rotate(360deg);
+        /* End at bottom, full rotation */
+        opacity: 0;
+        /* Fade out */
+    }
+}

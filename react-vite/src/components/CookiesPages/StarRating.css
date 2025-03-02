@@ -1,0 +1,16 @@
+.star {
+    font-size: 2rem;
+    color: #c6b5b5;
+    /* Default gray */
+    cursor: pointer;
+}
+
+.star.filled {
+    color: yellow;
+    /* Yellow color when filled */
+}
+
+.star:hover {
+    color: gold;
+    /* Hover color */
+}
