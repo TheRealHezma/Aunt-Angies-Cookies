@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetAllCookies } from '../../redux/cookies';
 import './CookiesHome.css';
 import { NavLink, useNavigate } from 'react-router-dom';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 function CookiesHome() {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function CookiesHome() {
     }, [dispatch]);
 
     const handleCreateCookie = () => {
-        navigate('/cookies/new'); // This assumes you have a route for creating a new cookie
+        navigate('/cookies/new');
     };
 
     function rainCookies() {
@@ -90,7 +91,33 @@ function CookiesHome() {
                     ))
                 )}
             </div>
+            <div className="contact-style">
+                {/* Facebook Icon */}
+                <div className="facebook">
+                    <a
+                        href="https://www.facebook.com/Aunt-Angies-Cookies-and-Co-100094284582480"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <FacebookIcon style={{ fontSize: 48, color: 'black' }} />
+                    </a>
+                </div>
+
+                {/* Contact Info Section */}
+                <div className="contact-container">
+                    <p className="contact-info">Contact Us:</p>
+                    <p className="phone-number">(907) 388-0410</p>
+                    <p className="email">orchard.angel3@gmail.com</p>
+                </div>
+
+                {/* Hours of Operation Section */}
+                <div className="time">
+                    <p className="hours-off-opp">Hours of Operation:</p>
+                    <p className="hours-off-opp-time">M-F: 9 AM - 5 PM</p>
+                </div>
+            </div>
         </div>
+
     );
 }
 
