@@ -13,6 +13,12 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    role = db.Column(db.String(255), default='user', nullable=False)
+
+    # Table constraints (for role validation)
+    __table_args__ = (
+        db.CheckConstraint("role IN ('user', 'admin')", name='check_role'),
+    )
 
     # Relationship with cookie
     cookies = db.relationship('Cookie', backref='user', lazy=True)
