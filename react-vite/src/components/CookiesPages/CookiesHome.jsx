@@ -9,6 +9,7 @@ function CookiesHome() {
     const dispatch = useDispatch();
     const cookies = useSelector(state => Object.values(state.cookies.allCookies)) || [];
     const navigate = useNavigate();
+    const user = useSelector(state => state.session.user); // Get the user from the Redux store
 
     useEffect(() => {
         dispatch(thunkGetAllCookies());
@@ -64,19 +65,17 @@ function CookiesHome() {
         return cleanup;
     }, []);
 
-    useEffect(() => {
-        const cleanup = rainCookies();
-        return cleanup;
-    }, []);
-
 
     return (
         <div>
-            <div className="create-cookie-button-container">
-                <button onClick={handleCreateCookie} className="create-cookie-button">
-                    Create New Cookie
-                </button>
-            </div>
+            {/* Conditionally render the "Create New Cookie" button if the user is an admin */}
+            {user && user.role === 'admin' && (
+                <div className="create-cookie-button-container">
+                    <button onClick={handleCreateCookie} className="create-cookie-button">
+                        Create New Cookie
+                    </button>
+                </div>
+            )}
 
             <div className="cookies-grid">
                 {cookies.length === 0 ? (
@@ -91,6 +90,7 @@ function CookiesHome() {
                     ))
                 )}
             </div>
+
             <div className="contact-style">
                 {/* Facebook Icon */}
                 <div className="facebook">
@@ -117,7 +117,6 @@ function CookiesHome() {
                 </div>
             </div>
         </div>
-
     );
 }
 
