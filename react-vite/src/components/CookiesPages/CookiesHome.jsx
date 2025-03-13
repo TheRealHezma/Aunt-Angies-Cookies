@@ -105,7 +105,7 @@ function CookiesHome() {
 
                 {/* Contact Info Section */}
                 <div className="contact-container">
-                    <p className="contact-info">Contact Us:</p>
+                    <p className="contact-info">Contact us for cookies not listed:</p>
                     <p className="phone-number">(907) 388-0410</p>
                     <p className="email">orchard.angel3@gmail.com</p>
                 </div>
