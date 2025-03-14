@@ -10,6 +10,41 @@
 
 .login-button:hover,
 .demo-button:hover {
-    background-color: #add8e6;
+    background-color: #8bbbcc;
     /* Slightly darker light blue on hover */
+}
+
+.loginmodal {
+    background-color: lightpink;
+}
+
+.loginh1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-email {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-p-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

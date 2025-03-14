@@ -40,33 +40,45 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
+    <div className='loginmodal'>
+      <h1 className="loginh1"> Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit" className="login-button">Log In</button>
-        <button type="button" onClick={handleDemoLogin} className="demo-button">Demo User</button>
+        <div className="login-email">
+          <label>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          {errors.email && <p>{errors.email}</p>}
+        </div>
+
+        <div className="login-password">
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          {errors.password && <p>{errors.password}</p>}
+        </div>
+
+        <div className="login-button-div">
+          <button type="submit" className="login-button">Log In</button>
+        </div>
+
+        <div className="login-p-tag">
+          <p>Don't have an account? Sign up here!</p>
+        </div>
+        {/* <button type="button" onClick={handleDemoLogin} className="demo-button">Demo User</button> */}
       </form>
-    </>
+    </div>
   );
 }
 
