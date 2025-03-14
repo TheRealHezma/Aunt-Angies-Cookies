@@ -3,6 +3,7 @@ import { thunkLogin, thunkDemoLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useNavigate } from "react-router-dom";
+import SignupFormModal from "../SignupFormModal"; // Import the Signup Modal
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -10,7 +11,7 @@ function LoginFormModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal(); // Get setModalContent from useModal
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -45,7 +46,7 @@ function LoginFormModal() {
       <form onSubmit={handleSubmit}>
         <div className="login-email">
           <label>
-            Email
+            Email:
             <input
               type="text"
               value={email}
@@ -58,7 +59,7 @@ function LoginFormModal() {
 
         <div className="login-password">
           <label>
-            Password
+            Password:
             <input
               type="password"
               value={password}
@@ -74,9 +75,17 @@ function LoginFormModal() {
         </div>
 
         <div className="login-p-tag">
-          <p>Don't have an account? Sign up here!</p>
+          <p>
+            Don't have an account?{" "}
+            <span
+              className="signup-link"
+              onClick={() => setModalContent(<SignupFormModal />)}
+            >
+              Sign Up {' '}
+            </span>
+            here !
+          </p>
         </div>
-        {/* <button type="button" onClick={handleDemoLogin} className="demo-button">Demo User</button> */}
       </form>
     </div>
   );

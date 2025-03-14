@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import { useNavigate } from "react-router-dom";
 import "./SignupForm.css";
+import LoginFormModal from "../LoginFormModal";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ function SignupFormModal() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const { closeModal } = useModal();
+  const { closeModal, setModalContent } = useModal(); // Get setModalContent from Modal context
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -37,58 +38,85 @@ function SignupFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/cookies'); // Redirect to /cookies after successful signup
+      navigate("/cookies"); // Redirect to /cookies after successful signup
     }
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className="the-sign-up-modal">
+      <h1 className="signup-h1">Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        {errors.username && <p>{errors.username}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit" className="sign-up-button">Sign Up</button>
+        <div className="email">
+          <label>
+            Email:
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          {errors.email && <p>{errors.email}</p>}
+        </div>
+
+        <div className="username">
+          <label>
+            Username:
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+          {errors.username && <p>{errors.username}</p>}
+        </div>
+
+        <div className="password">
+          <label>
+            Password:
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          {errors.password && <p>{errors.password}</p>}
+        </div>
+
+        <div className="conf-password">
+          <label>
+            Confirm Password:
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </label>
+          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        </div>
+
+        <div className="button">
+          <button type="submit" className="sign-up-button">Sign Up</button>
+        </div>
+
+        <div className="signup-p-tag">
+          <p>
+            Already have an account?{" "}
+            <span
+              className="signup-link"
+              onClick={() => setModalContent(<LoginFormModal />)} // This will show the login form
+            >
+              Log in{' '}
+            </span>
+            here!
+          </p>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

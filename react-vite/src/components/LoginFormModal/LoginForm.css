@@ -16,6 +16,7 @@
 
 .loginmodal {
     background-color: lightpink;
+    /* color: lightblue; */
 }
 
 .loginh1 {
@@ -47,4 +48,36 @@
     justify-content: center;
     align-items: center;
 
+}
+
+.signup-link {
+    color: blue;
+    cursor: pointer;
+}
+
+.signup-link:hover {
+    color: darkblue;
+}
+
+.login-email input,
+.login-password input {
+    /* Removes background */
+    background: transparent;
+
+    /* Removes default borders */
+    border: none;
+
+    /* Adds a thin bottom border */
+    border-bottom: 3px solid lightblue;
+}
+
+/* Adjust modal size for large screens */
+@media screen and (min-width: 992px) {
+
+    /* Adjusted from 1200px to 992px */
+    #modal-content {
+        width: 30% !important;
+        /* Force apply */
+        height: 40% !important;
+    }
 }
