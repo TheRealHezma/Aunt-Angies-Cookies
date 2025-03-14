@@ -6,17 +6,19 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/Modal"; // Add useModal for modal handling
 import "./Navigation.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { setModalContent } = useModal(); // Use setModalContent from the modal context
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation(); // Prevent bubbling to document
     setShowMenu(!showMenu);
   };
 
@@ -40,12 +42,18 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
-    navigate('/')
+    navigate('/');
+  };
+
+  const handleProfileClick = () => {
+    if (!user) {
+      setModalContent(<LoginFormModal />); // Open the LoginFormModal if not logged in
+    }
   };
 
   return (
     <>
-      <button onClick={toggleMenu} className="user-icon">
+      <button onClick={toggleMenu} className="user-icon" onClick={handleProfileClick}>
         <FaUserCircle />
       </button>
       {showMenu && (
