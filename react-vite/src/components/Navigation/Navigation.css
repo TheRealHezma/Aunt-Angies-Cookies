@@ -224,3 +224,9 @@ ul {
   flex-direction: column;
 
 }
+
+
+.quantity-selector {
+  background-color: lightblue;
+  border: none
+}
