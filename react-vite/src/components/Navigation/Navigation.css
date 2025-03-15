@@ -159,6 +159,8 @@ a:hover,
   width: 50px;
   /* Adjust image size */
   height: auto;
+  border: 2px solid rgb(152, 90, 25) !important;
+
 }
 
 .remove-item-button {
