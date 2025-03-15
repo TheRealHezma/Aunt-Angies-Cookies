@@ -1,8 +1,18 @@
 .cart-item {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    align-items: flex-start;
+    /* Align items at the top */
+    margin-bottom: 1px;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
 
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    /* Stack elements vertically */
+    justify-content: start;
+    align-items: flex-start;
 }
 
 .cart-item-image {
@@ -17,6 +27,9 @@
 
     /* Ensure the image doesn't stretch */
     object-fit: cover;
+
+    border: 1px solid black;
+
 }
 
 .modal-content {
@@ -93,4 +106,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex flex-start;
+}
+
+.item-price {
+    font-weight: bold;
 }

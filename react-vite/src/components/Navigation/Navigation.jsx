@@ -115,13 +115,13 @@ function Navigation() {
                                 ))}
                               </select>
                             </div>
+                            <button
+                              className="remove-item-button"
+                              onClick={() => handleRemoveItem(item.id)}
+                            >
+                              Remove
+                            </button>
                           </div>
-                          <button
-                            className="remove-item-button"
-                            onClick={() => handleRemoveItem(item.id)}
-                          >
-                            Remove
-                          </button>
                         </li>
                       ))
                     ) : (
