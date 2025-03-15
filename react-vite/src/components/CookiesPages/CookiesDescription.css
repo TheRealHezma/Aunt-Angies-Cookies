@@ -17,31 +17,10 @@
 }
 
 .cookie-image {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    /* This ensures the image scales to fit within the container without stretching */
-    max-width: 600px;
-    /* Prevents the image from becoming too large */
-    max-height: 400px;
-    /* Optionally, you can limit the height as well */
+    width: 50%;
+    height: auto;
     border-radius: 10px;
     margin-right: 20px;
-}
-
-@media (max-width: 768px) {
-    .cookie-image {
-        max-width: 50%;
-        max-height: 300px;
-        /* Optional: Adjust max height when the screen is small */
-    }
-}
-
-@media (max-width: 480px) {
-    .cookie-image {
-        max-height: 200px;
-        /* Further adjust for smaller screens */
-    }
 }
 
 .cookie-details {
@@ -116,7 +95,6 @@
     background-color: #ffc0cb;
     border-bottom: 1px solid #ccc;
     text-align: left;
-    width: 97%;
 }
 
 .reviews-list li p {
@@ -235,7 +213,7 @@
     background-color: #87cefa;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
     transition: transform 0.2s ease-in-out;
     text-align: left;
