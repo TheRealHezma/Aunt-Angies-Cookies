@@ -51,7 +51,13 @@ function Navigation() {
   }, [cartOpen]);
 
   const handleQuantityChange = (itemId, newQuantity) => {
-    dispatch(updateItemQuantity({ id: itemId, quantity: parseInt(newQuantity, 10) }));
+    const quantity = parseInt(newQuantity, 10);
+
+    if (quantity === 0) {
+      dispatch(removeItem(itemId)); // Remove item if quantity is 0
+    } else {
+      dispatch(updateItemQuantity({ id: itemId, quantity }));
+    }
   };
 
   return (
@@ -102,9 +108,9 @@ function Navigation() {
                                 value={item.quantity}
                                 onChange={(e) => handleQuantityChange(item.id, e.target.value)}
                               >
-                                {[...Array(10).keys()].map((num) => (
-                                  <option key={num + 1} value={num + 1}>
-                                    {num + 1}
+                                {[...Array(11).keys()].map((num) => (
+                                  <option key={num} value={num}>
+                                    {num}
                                   </option>
                                 ))}
                               </select>
