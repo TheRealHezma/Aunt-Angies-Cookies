@@ -7,7 +7,7 @@ import "./Navigation.css";
 import CheckoutModal from "../CheckoutModal/CheckoutModal";
 import logo from '../../../public/Updatedlogo.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import FacebookIcon from '@mui/icons-material/Facebook';
+import { updateItemQuantity } from "../../redux/cartSlice";
 
 function Navigation() {
   const user = useSelector((state) => state.session.user);
@@ -50,6 +50,10 @@ function Navigation() {
     };
   }, [cartOpen]);
 
+  const handleQuantityChange = (itemId, newQuantity) => {
+    dispatch(updateItemQuantity({ id: itemId, quantity: parseInt(newQuantity, 10) }));
+  };
+
   return (
     <>
       <nav className="navigation-bar">
@@ -82,26 +86,43 @@ function Navigation() {
             {cartOpen && (
               <div className="cart-dropdown" ref={cartRef}>
                 <h3>Shopping Cart</h3>
-                <ul className="cart-items scrollable-cart">
-                  {cartItems.length > 0 ? (
-                    cartItems.map((item) => (
-                      <li key={item.id} className="cart-item">
-                        <div className="cart-item-info">
-                          <img src={item.url} alt={item.name} className="cart-item-image" />
-                          <p>{item.name} - quantity: {item.quantity}</p>
-                        </div>
-                        <button
-                          className="remove-item-button"
-                          onClick={() => handleRemoveItem(item.id)}
-                        >
-                          Remove
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <li>Your cart is empty</li>
-                  )}
-                </ul>
+                <div className="shoppping-cart-items">
+                  <ul className="cart-items scrollable-cart">
+                    {cartItems.length > 0 ? (
+                      cartItems.map((item) => (
+                        <li key={item.id} className="cart-item">
+                          <div className="cart-item-info">
+                            <img src={item.url} alt={item.name} className="cart-item-image" />
+                            <p className="cart-item-name">{item.name}</p>
+                            <div className="cart-item-quantity">
+                              <label htmlFor={`quantity-${item.id}`}>Quantity:</label>
+                              <select
+                                id={`quantity-${item.id}`}
+                                className="quantity-selector"
+                                value={item.quantity}
+                                onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                              >
+                                {[...Array(10).keys()].map((num) => (
+                                  <option key={num + 1} value={num + 1}>
+                                    {num + 1}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <button
+                            className="remove-item-button"
+                            onClick={() => handleRemoveItem(item.id)}
+                          >
+                            Remove
+                          </button>
+                        </li>
+                      ))
+                    ) : (
+                      <li>Your cart is empty</li>
+                    )}
+                  </ul>
+                </div>
                 <button className="checkout-button" onClick={handleCheckoutClick}>
                   Checkout
                 </button>

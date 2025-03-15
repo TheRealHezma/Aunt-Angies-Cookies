@@ -128,28 +128,37 @@ a:hover,
 .cart-dropdown {
   position: absolute;
   top: 40px;
-  right: 0;
+  right: auto;
+  left: 50%;
   width: 250px;
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color: lightpink;
+  border: 3px solid rgb(152, 90, 25);
   border-radius: 5px;
   padding: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: -10px -10px 5px rgba(0, 0, 0, 0.3);
   z-index: 100;
+  transform: translateX(-50%);
+
 }
 
 .cart-items {
-  max-height: 250px;
+  display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  /* Ensures items align to the left */
+  justify-content: space-between;
+  max-height: 250px;
   overflow-y: auto;
   margin-bottom: 10px;
   border-top: 1px solid #ccc;
   padding-top: 10px;
+  /* width: 100%; */
 }
 
 /* Adjust size of the cart item image */
 .cart-item-image {
-  width: calc(75% + 5px);
+  width: 50px;
+  /* Adjust image size */
   height: auto;
 }
 
@@ -160,6 +169,8 @@ a:hover,
   padding: 5px 10px;
   border-radius: 3px;
   cursor: pointer;
+  margin-left: auto;
+  /* Push to the right */
 }
 
 .remove-item-button:hover {
@@ -178,7 +189,7 @@ a:hover,
 }
 
 .checkout-button:hover {
-  background-color: blue;
+  background-color: #8bbbcc;
 }
 
 /* Scrollbar customization for the cart */
@@ -204,4 +215,12 @@ ul {
   font-size: 24px;
   /* Adjust size as needed */
   color: black;
+}
+
+.shoppping-cart-items {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start !important;
+  flex-direction: column;
+
 }

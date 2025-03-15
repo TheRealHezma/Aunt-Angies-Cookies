@@ -2,25 +2,62 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+
 }
 
 .cart-item-image {
-    width: 100px;
     /* Adjust size as needed */
-    height: 100px;
-    margin-right: 10px;
+
+    width: 100px;
+
     /* Space between image and item details */
-    object-fit: cover;
+    height: 100px;
+
+    margin-right: 10px;
+
     /* Ensure the image doesn't stretch */
+    object-fit: cover;
 }
 
-.modal-content h3 {
-    margin-bottom: 20px;
+.modal-content {
+    background-color: lightpink !important;
+    border: 3px solid rgb(152, 90, 25);
+    border-radius: 5px;
+
 }
+
+.cart-items-in-checkout {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
+    /* Enables vertical scrolling */
+    padding-right: 5px;
+    /* Prevents content from hiding under scrollbar */
+    padding-top: 10px;
+}
+
+/* Scrollbar customization for the cart */
+.cart-items-in-checkout::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cart-items-in-checkout::-webkit-scrollbar-thumb {
+    background-color: lightblue;
+    border-radius: 3px;
+}
+
+/* .modal-content h3 {
+    margin-bottom: 20px;
+} */
+
+
 
 .modal-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 20px;
 }
 
@@ -30,6 +67,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 45%;
 }
 
 .modal-checkout-button {
@@ -43,9 +81,16 @@
 }
 
 .modal-checkout-button:hover {
-    background-color: blue;
+    background-color: #8bbbcc;
 }
 
 .modal-cancel-button:hover {
     background-color: red;
+}
+
+
+.price {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex flex-start;
 }
