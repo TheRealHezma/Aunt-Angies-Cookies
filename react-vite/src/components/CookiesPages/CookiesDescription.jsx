@@ -168,7 +168,7 @@ function CookiesDescription() {
                                     <div className='theReview'>
                                         <p><strong>{review.username}</strong></p>
                                         <p>{review.review}</p>
-                                        <p>Rating: {review.stars} stars</p>
+                                        {/* <p>Rating: {review.stars} stars</p> */}
                                         <StarRating rating={review.stars} onChange={() => { }} />
                                         {currentUser && currentUser.id === review.user_id && (
                                             <div>

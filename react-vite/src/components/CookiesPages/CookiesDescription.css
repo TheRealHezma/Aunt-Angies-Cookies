@@ -69,13 +69,15 @@
 
 /* Reviews Section */
 .reviews-section {
-    width: 100%;
-    max-width: 800px;
+    /* width: 90%;
+    max-width: 800px; */
     margin-top: 40px;
     background-color: #ffc0cb;
     padding: 20px;
     border-radius: 8px;
     margin-left: 0;
+    border: 3px solid rgb(152, 90, 25);
+
 }
 
 .reviews-list {
@@ -114,6 +116,7 @@
     background-color: #ffc0cb;
     border-bottom: 1px solid #ccc;
     text-align: left;
+    width: 97%;
 }
 
 .reviews-list li p {
@@ -223,20 +226,24 @@
 }
 
 
+
+
+
+
+
 .theReview {
     background-color: #87cefa;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 15px;
     transition: transform 0.2s ease-in-out;
-    text-align: left !important;
+    text-align: left;
     /* Ensures text is aligned to the left */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     /* Aligns all content to the left */
-    margin-left: 0 !important;
 }
 
 .theReview p,
