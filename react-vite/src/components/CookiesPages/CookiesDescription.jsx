@@ -124,7 +124,7 @@ function CookiesDescription() {
     return (
         <div className="cookie-description-container">
             <div className="cookie-description">
-                <img src={cookie.url} alt={cookie.name} className="cookie-image" />
+                <img src={cookie.url} alt={cookie.name} className="cookie-image-description" />
                 <div className="cookie-details">
                     <h1>{cookie.name}</h1>
                     <p>{cookie.description}</p>

@@ -16,11 +16,30 @@
     width: 100%;
 }
 
-.cookie-image {
-    width: 50%;
-    height: auto;
+.cookie-image-description {
+    width: 100% !important;
+    height: auto !important;
+    /* Ensure the height adjusts based on the width */
+    object-fit: contain !important;
+    max-width: 600px;
+    max-height: 400px;
     border-radius: 10px;
     margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+    .cookie-image-description {
+        max-width: 100%;
+        max-height: 300px;
+        /* Optional: Adjust max height when the screen is small */
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-image-description {
+        max-height: 200px;
+        /* Further adjust for smaller screens */
+    }
 }
 
 .cookie-details {
