@@ -111,3 +111,14 @@
 .item-price {
     font-weight: bold;
 }
+
+.formTel input,
+.formName input,
+.formEmail input {
+    border: 2px solid brown;
+    background-color: lightblue;
+    width: 75%;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+}

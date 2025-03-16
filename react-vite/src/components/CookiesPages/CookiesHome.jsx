@@ -85,7 +85,7 @@ function CookiesHome() {
                         <NavLink to={`/cookies/${cookie.id}`} key={cookie.id} className="cookie-card">
                             <img src={cookie.url} alt={cookie.name} className="cookie-image" />
                             <h2>{cookie.name}</h2>
-                            <p>Price: ${cookie.price.toFixed(2)} /dozen</p>
+                            <p>Price: ${cookie.price.toFixed(2)} per dozen</p>
                         </NavLink>
                     ))
                 )}

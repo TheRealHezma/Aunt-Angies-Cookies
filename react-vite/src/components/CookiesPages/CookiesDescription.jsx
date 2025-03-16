@@ -128,7 +128,7 @@ function CookiesDescription() {
                 <div className="cookie-details">
                     <h1>{cookie.name}</h1>
                     <p>{cookie.description}</p>
-                    <p className="price">Price: ${cookie.price.toFixed(2)} /dozen</p>
+                    <p className="price">Price: ${cookie.price.toFixed(2)} per dozen</p>
                     <button
                         className={`add_to_cart_button ${addedToCart ? 'added' : ''}`}
                         onClick={handleAddToCart}
