@@ -233,3 +233,48 @@ ul {
   background-color: lightblue;
   border: none
 }
+
+/* Position the red dot directly on the shopping cart */
+.cart-notification {
+  position: absolute;
+  top: 0px;
+  /* Adjust as needed to align it perfectly */
+  right: 0px;
+  /* Adjust to move it closer */
+  background-color: lightpink;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: translate(50%, -50%);
+  /* Moves it slightly up and to the right */
+}
+
+/* Ensure the shopping cart container is positioned correctly */
+.shopping-cart {
+  position: relative;
+}
+
+/* Ensure the cart button is properly positioned */
+.cart-button {
+  position: relative;
+  background-color: lightblue;
+  padding: 10px;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+/* Make sure the cart icon is positioned correctly */
+.cart-icon {
+  font-size: 24px;
+  /* Adjust size if necessary */
+  color: black;
+}

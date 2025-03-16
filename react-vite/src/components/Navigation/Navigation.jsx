@@ -88,6 +88,9 @@ function Navigation() {
           <li className="shopping-cart">
             <button className="cart-button" onClick={toggleCart}>
               <ShoppingCartIcon className="cart-icon" />
+              {cartItems.length > 0 && (
+                <span className="cart-notification">{cartItems.length}</span>
+              )} {/* Red Dot with Item Count */}
             </button>
             {cartOpen && (
               <div className="cart-dropdown" ref={cartRef}>
@@ -134,9 +137,8 @@ function Navigation() {
                 </button>
               </div>
             )}
-          </li>          <li>
-            <ProfileButton />
           </li>
+          <ProfileButton />
         </ul>
       </nav>
 
