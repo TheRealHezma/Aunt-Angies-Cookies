@@ -7,6 +7,7 @@ import CookiesDescription from '../components/CookiesPages/CookiesDescription';
 import CreateCookieForm from '../components/CookiesPages/CreateCookieForm';
 import EditCookieForm from '../components/CookiesPages/EditCookieForm'
 import HomePage from '../components/HomePage/HomePgae';
+import OrderConf from '../components/OrderConfirmation/orderConf';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
         path: "cookies/:id",
         element: <CookiesDescription />,
       },
+      {
+        path: 'cookies/thank-you',
+        element: <OrderConf />
+      }
     ],
   },
 ]);

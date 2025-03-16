@@ -41,8 +41,14 @@ function CheckoutModal({ show, handleClose, cartItems }) {
                 body: JSON.stringify(requestBody),
             });
 
+            if (response.ok) {
+                handleClose();
+                navigate('/cookies/thank-you', { state: { cartItems } });
+            } else {
+                console.warn("Failed to send email please try again later");
+            }
         } catch (error) {
-            console.error('Error sending email:', error);
+            console.error("Error sending email:", error);
         }
     };
 
