@@ -278,3 +278,36 @@ ul {
   /* Adjust size if necessary */
   color: black;
 }
+
+.checkout-container {
+  position: relative;
+  display: inline-block;
+}
+
+.checkout-tooltip {
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  /* Adjusted to align with the cursor */
+  left: 100%;
+  /* Position it right next to the button */
+  transform: translateX(10px);
+  /* Adjust the horizontal distance to the right */
+  width: max-content;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  /* Prevent it from interfering with other elements */
+}
+
+.checkout-container:hover .checkout-tooltip {
+  visibility: visible;
+  opacity: 1;
+}

@@ -132,9 +132,18 @@ function Navigation() {
                     )}
                   </ul>
                 </div>
-                <button className="checkout-button" onClick={handleCheckoutClick}>
-                  Checkout
-                </button>
+                <div className="checkout-container">
+                  <button
+                    className="checkout-button"
+                    onClick={handleCheckoutClick}
+                    disabled={cartItems.length === 0}
+                  >
+                    Checkout
+                  </button>
+                  {cartItems.length === 0 && (
+                    <span className="checkout-tooltip">You need to add items to checkout</span>
+                  )}
+                </div>
               </div>
             )}
           </li>
