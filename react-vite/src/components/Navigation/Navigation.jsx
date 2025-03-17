@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -11,33 +11,40 @@ import { updateItemQuantity } from "../../redux/cartSlice";
 
 function Navigation() {
   const user = useSelector((state) => state.session.user);
-  const cartItems = useSelector((state) => state.cart.items); // Access cart items from Redux store
+  const cartItems = useSelector((state) => state.cart.items);
   const [cartOpen, setCartOpen] = useState(false);
-  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false); // Modal state
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const cartRef = useRef(null); // Create a ref for the cart dropdown
+  const cartRef = useRef(null);
+  const location = useLocation();
+
+  // Clear cart when navigating to '/cookies/thank-you'
+  useEffect(() => {
+    if (location.pathname === "/cookies/thank-you") {
+      cartItems.forEach((item) => dispatch(removeItem(item.id)));
+    }
+  }, [location.pathname, dispatch, cartItems]);
 
   const toggleCart = () => {
     setCartOpen(!cartOpen);
   };
 
   const handleRemoveItem = (itemId) => {
-    dispatch(removeItem(itemId)); // Dispatch the removeItem action
+    dispatch(removeItem(itemId));
   };
 
   const handleCheckoutClick = () => {
-    setIsCheckoutModalOpen(true); // Open the checkout modal when checkout is clicked
+    setIsCheckoutModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsCheckoutModalOpen(false); // Close the modal
+    setIsCheckoutModalOpen(false);
   };
 
-  // useEffect to handle clicks outside the cart
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (cartRef.current && !cartRef.current.contains(event.target)) {
-        setCartOpen(false); // Close the cart if the click is outside the cart
+        setCartOpen(false);
       }
     };
 
@@ -52,9 +59,8 @@ function Navigation() {
 
   const handleQuantityChange = (itemId, newQuantity) => {
     const quantity = parseInt(newQuantity, 10);
-
     if (quantity === 0) {
-      dispatch(removeItem(itemId)); // Remove item if quantity is 0
+      dispatch(removeItem(itemId));
     } else {
       dispatch(updateItemQuantity({ id: itemId, quantity }));
     }
@@ -73,24 +79,13 @@ function Navigation() {
               <img src={logo} alt="Logo" className="nav-logo" />
             )}
           </li>
-          <li>
-            <div className="nav-links">
-              {/* <NavLink to="/">About</NavLink> */}
-              {/* <a
-                href="https://www.facebook.com/Aunt-Angies-Cookies-and-Co-100094284582480"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FacebookIcon style={{ fontSize: 24, color: 'black' }} />
-              </a> */}
-            </div>
-          </li>
+
           <li className="shopping-cart">
             <button className="cart-button" onClick={toggleCart}>
               <ShoppingCartIcon className="cart-icon" />
               {cartItems.length > 0 && (
                 <span className="cart-notification">{cartItems.length}</span>
-              )} {/* Red Dot with Item Count */}
+              )}
             </button>
             {cartOpen && (
               <div className="cart-dropdown" ref={cartRef}>
@@ -147,6 +142,7 @@ function Navigation() {
               </div>
             )}
           </li>
+
           <ProfileButton />
         </ul>
       </nav>
