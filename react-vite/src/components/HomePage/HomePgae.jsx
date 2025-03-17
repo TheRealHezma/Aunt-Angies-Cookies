@@ -6,6 +6,7 @@ import chocChipImage from '../../../../prepWork/choc_chip_cookies.jpg';
 import gojo_chibi from '../../../../prepWork/Gojo_sugar_cookie.jpg';
 import pokemonSugarCook from '../../../../prepWork/Pokemon_sugar_cook.jpg';
 // import pumpkinFallSugarCook from '../../../../prepWork/Pumpkin_fall_Suger_cook.jpg';
+import summer_cookies from '../../../../prepWork/summer_cookies.jpg'
 import FacebookIcon from '@mui/icons-material/Facebook';
 
 export default function HomePage() {
@@ -35,6 +36,10 @@ export default function HomePage() {
         //     image: pumpkinFallSugarCook,
         //     text: "Celebrate the fall season with our special Pumpkin Fall Sugar Cookies, perfect for any autumn gathering.",
         // },
+        {
+            image: summer_cookies,
+            text: "Don't forget to place your order for the Forth of July!"
+        }
     ];
 
     function rainCookies() {

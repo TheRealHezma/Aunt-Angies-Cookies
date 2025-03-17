@@ -196,7 +196,7 @@
 }
 
 .submit-review-button {
-    background-color: lightblue;
+    background-color: #a17f35;
     /* Light blue background */
     border: none;
     /* Remove default border */
@@ -218,7 +218,7 @@
 }
 
 .add_to_cart_button {
-    background-color: lightblue;
+    background-color: #a17f35;
     color: white
 }
 
@@ -262,5 +262,5 @@
 
 
 .review-form {
-    background-color: grey;
+    background-color: lightBlue;
 }
