@@ -1,0 +1,53 @@
+.order-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.order-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* Ensures items stack down the page */
+    align-items: center;
+    gap: 20px;
+    /* Adds spacing between items */
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    /* Limits width for a neat look */
+    text-align: left;
+    background-color: lightBlue;
+    /* Light background for each item */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.order-details {
+    flex: 1;
+    /* Takes remaining space */
+}
+
+.order-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.order-price {
+    font-weight: bold;
+    color: #d9534f;
+    /* Red color to highlight price */
+}

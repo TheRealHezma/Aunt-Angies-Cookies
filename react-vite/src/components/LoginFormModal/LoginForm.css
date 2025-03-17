@@ -10,6 +10,74 @@
 
 .login-button:hover,
 .demo-button:hover {
-    background-color: #add8e6;
+    background-color: #8bbbcc;
     /* Slightly darker light blue on hover */
+}
+
+.loginmodal {
+    background-color: lightpink;
+    /* color: lightblue; */
+}
+
+.loginh1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-email {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-password {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-p-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.signup-link {
+    color: blue;
+    cursor: pointer;
+}
+
+.signup-link:hover {
+    color: darkblue;
+}
+
+.login-email input,
+.login-password input {
+    /* Removes background */
+    background: transparent;
+
+    /* Removes default borders */
+    border: none;
+
+    /* Adds a thin bottom border */
+    border-bottom: 3px solid lightblue;
+}
+
+/* Adjust modal size for large screens */
+@media screen and (min-width: 992px) {
+
+    /* Adjusted from 1200px to 992px */
+    #modal-content {
+        width: 30% !important;
+        /* Force apply */
+        height: 40% !important;
+    }
 }

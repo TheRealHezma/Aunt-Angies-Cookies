@@ -11,14 +11,16 @@
     padding: 16px;
     text-align: center;
     background-color: lightblue;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .cookie-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+    width: 100% !important;
+    height: 200px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
 }
+
 
 .create-cookie-button-container {
     display: flex;
@@ -40,4 +42,48 @@
 
 .create-cookie-button:hover {
     background-color: #87cefa;
+}
+
+
+.cookie {
+    position: absolute;
+    top: -50px;
+    /* Start above the screen */
+    width: 150px;
+    /* Increased size */
+    height: 150px;
+    /* Increased size */
+    background-image: url('../../../public/falldown-logo.png');
+    background-size: contain;
+    /* Ensure image scales without cutting off */
+    background-position: center;
+    /* Center image */
+    background-repeat: no-repeat;
+    animation: fall 4s linear forwards;
+    pointer-events: none;
+    /* So it doesn't interfere with clicks */
+}
+
+/* Falling and rotating animation combined */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        /* Start at top, no rotation */
+        opacity: 1;
+        /* Start fully visible */
+    }
+
+    80% {
+        transform: translateY(calc(100vh + 100px)) rotate(180deg);
+        /* Move down and rotate halfway */
+        opacity: 1;
+        /* Keep full opacity longer */
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100px)) rotate(360deg);
+        /* End at bottom, full rotation */
+        opacity: 0;
+        /* Fade out */
+    }
 }

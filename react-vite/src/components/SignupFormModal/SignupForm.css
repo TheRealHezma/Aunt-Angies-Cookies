@@ -1,3 +1,77 @@
 .sign-up-button {
     background-color: lightblue;
 }
+
+.sign-up-button:hover {
+    background-color: #8bbbcc;
+
+}
+
+.signup-h1 {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+.email {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+.username {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+.password {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+.conf-password {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+
+.button {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+.signup-p-tag {
+    display: flex;
+    justify-content: center;
+    display: center;
+}
+
+.email input,
+.username input,
+.password input,
+.conf-password input {
+    /* Removes background */
+    background: transparent;
+
+    /* Removes default borders */
+    border: none;
+
+    /* Adds a thin bottom border */
+    border-bottom: 3px solid lightblue;
+}
+
+
+/* Adjust modal size for large screens */
+@media screen and (min-width: 992px) {
+
+    /* Adjusted from 1200px to 992px */
+    #modal-content {
+        width: 30% !important;
+        /* Force apply */
+        height: 65% !important;
+    }
+}

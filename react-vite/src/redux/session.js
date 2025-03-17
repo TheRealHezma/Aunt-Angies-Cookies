@@ -22,33 +22,6 @@ export const thunkAuthenticate = () => async (dispatch) => {
   }
 };
 
-//testing
-// export const thunkLogin = (credentials) => async (dispatch) => {
-//   console.log("thunkLogin called with credentials:", credentials);
-
-//   const response = await fetch("/api/auth/login", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(credentials),
-//   });
-
-//   console.log("API response status:", response.status);
-
-//   if (response.ok) {
-//     const data = await response.json();
-//     console.log("API response data:", data);
-//     dispatch(setUser(data));
-//     return null; // No errors
-//   } else if (response.status < 500) {
-//     const errorMessages = await response.json();
-//     console.log("Client-side error:", errorMessages);
-//     return errorMessages;
-//   } else {
-//     console.log("Server error");
-//     return { server: "Something went wrong. Please try again" };
-//   }
-// };
-
 
 export const thunkLogin = (credentials) => async dispatch => {
   const response = await fetch("/api/auth/login", {
@@ -72,7 +45,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 export const thunkDemoLogin = () => (dispatch) => {
   const demoCredentials = {
     email: 'hezmam6@gmail.com',
-    password: 'copt4265'
+    password: 'seedUser'
   };
 
   return dispatch(thunkLogin(demoCredentials));
