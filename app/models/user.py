@@ -20,10 +20,11 @@ class User(db.Model, UserMixin):
         db.CheckConstraint("role IN ('user', 'admin')", name='check_role'),
     )
 
-    # Relationship with cookie
+ # Relationship with cookie
     cookies = db.relationship('Cookie', backref='user', lazy=True)
-    # Relationship with reviews (note: backref name changed to 'user_reviews' to avoid conflict)
+    # Relationship with reviews
     reviews = db.relationship('Review', backref='user', lazy=True)
+
 
     @property
     def password(self):
