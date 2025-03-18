@@ -16,9 +16,10 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
-    # Relationship with lists NEEED TO FIX THIS
-    # lists = db.relationship('List', backref='board', lazy=True, cascade="all, delete-orphan")
-    #users_in_board = db.relationship('UserInBoard', backref='board', lazy=True)
+ # Explicitly define the reverse relationship from Review to User
+    user = db.relationship('User', backref='reviews', lazy=True)
+    cookie = db.relationship('Cookie', backref='reviews', lazy=True, foreign_keys='Review.cookie_id')
+
 
     def to_dict(self):
         return {
