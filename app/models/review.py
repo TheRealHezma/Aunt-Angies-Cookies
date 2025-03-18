@@ -9,8 +9,8 @@ class Review(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    cookie_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('cookies.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    cookie_id = db.Column(db.Integer, db.ForeignKey('cookies.id'), nullable=False)
     review = db.Column(db.String, nullable=False)
     stars = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
@@ -18,7 +18,7 @@ class Review(db.Model):
 
  # Explicitly define the reverse relationship from Review to User
     user = db.relationship('User', backref='reviews', lazy=True)
-    cookie = db.relationship('Cookie', backref='reviews', lazy=True, foreign_keys='Review.cookie_id')
+    cookie = db.relationship('Cookie', backref='reviews', lazy=True)
 
 
     def to_dict(self):
