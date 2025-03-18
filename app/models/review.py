@@ -17,7 +17,8 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
-    cookie = db.relationship('Cookie', backref='reviews', lazy=True)
+    user = db.relationship('User', backref='user_reviews', lazy=True)
+    cookie = db.relationship('Cookie', backref='cookie_reviews_back', lazy=True)
 
     def to_dict(self):
         return {
