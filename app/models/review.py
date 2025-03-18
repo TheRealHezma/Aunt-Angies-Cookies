@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 
 
 class Review(db.Model):
+    #force migrate
     __tablename__ = 'reviews'
 
     if environment == "production":
@@ -16,10 +17,7 @@ class Review(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
- # Explicitly define the reverse relationship from Review to User
-    user = db.relationship('User', backref='reviews', lazy=True)
     cookie = db.relationship('Cookie', backref='reviews', lazy=True)
-
 
     def to_dict(self):
         return {
