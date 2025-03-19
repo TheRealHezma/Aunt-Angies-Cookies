@@ -6,8 +6,17 @@ from flask_login import UserMixin
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+    # if environment == "production":
+    #     __table_args__ = {'schema': SCHEMA}
+
+# __table_args__ = (
+#     {'schema': SCHEMA} if environment == "production" else None,
+#     db.CheckConstraint("role IN ('user', 'admin')", name='check_role'),
+# )
+# if environment == "production":
+#     __table_args__ = (__table_args__[1],{'schema': SCHEMA})
+# else:
+#     __table_args__ = (__table_args__[1],)
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
@@ -16,9 +25,9 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(255), default='user', nullable=False)
 
     # Table constraints (for role validation)
-    __table_args__ = (
-        db.CheckConstraint("role IN ('user', 'admin')", name='check_role'),
-    )
+    # __table_args__ = (
+    #     db.CheckConstraint("role IN ('user', 'admin')", name='check_role'),
+    # )
 
  # Relationship with cookie
     cookies = db.relationship('Cookie', backref='user', lazy=True)
