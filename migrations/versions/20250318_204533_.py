@@ -37,14 +37,13 @@ def upgrade():
 
     op.create_table('cookies',
         sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column('user_id', sa.Integer(), nullable=False),
-        sa.Column('name', sa.String(), nullable=False),
+        sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id'), nullable=False),        sa.Column('name', sa.String(), nullable=False),
         sa.Column('description', sa.String(), nullable=True),
         sa.Column('price', sa.Float(), nullable=True),
         sa.Column('url', sa.String(), nullable=False),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
-        sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+        # sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
         sa.PrimaryKeyConstraint('id')
     )
 
