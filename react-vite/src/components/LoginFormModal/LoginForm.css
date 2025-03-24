@@ -69,6 +69,10 @@
 
     /* Adds a thin bottom border */
     border-bottom: 3px solid lightblue;
+
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    text-align: right;
 }
 
 .error-message {
