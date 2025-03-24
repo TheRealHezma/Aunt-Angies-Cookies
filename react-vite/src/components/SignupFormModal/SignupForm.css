@@ -10,44 +10,44 @@
 .signup-h1 {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 .email {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 .username {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 .password {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 .conf-password {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 
 .button {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 .signup-p-tag {
     display: flex;
     justify-content: center;
-    display: center;
+    /* display: center; */
 }
 
 .email input,

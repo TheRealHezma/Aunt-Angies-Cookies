@@ -22,7 +22,7 @@ function SignupFormModal() {
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
-          "Confirm Password field must be the same as the Password field",
+          "Passwords must match",
       });
     }
 
@@ -96,8 +96,8 @@ function SignupFormModal() {
               required
             />
           </label>
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         </div>
+        {errors.confirmPassword && <p className="conf-pass">{errors.confirmPassword}</p>}
 
         <div className="button">
           <button type="submit" className="sign-up-button">Sign Up</button>
