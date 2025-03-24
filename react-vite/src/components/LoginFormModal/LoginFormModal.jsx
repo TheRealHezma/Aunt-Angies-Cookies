@@ -67,8 +67,8 @@ function LoginFormModal() {
               required
             />
           </label>
-          {errors.password && <p>{errors.password}</p>}
         </div>
+        {errors.password && <p className="error-message">{errors.password}</p>}
 
         <div className="login-button-div">
           <button type="submit" className="login-button">Log In</button>
