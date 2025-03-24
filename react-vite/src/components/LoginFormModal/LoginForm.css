@@ -69,7 +69,22 @@
 
     /* Adds a thin bottom border */
     border-bottom: 3px solid lightblue;
+
+    /* display: flex; */
+    /* justify-content: flex-end; */
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Centers the text */
+}
+
 
 /* Adjust modal size for large screens */
 @media screen and (min-width: 992px) {
@@ -80,4 +95,14 @@
         /* Force apply */
         height: 40% !important;
     }
+}
+
+.conf-pass {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
